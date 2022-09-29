@@ -3,9 +3,12 @@ import axios from 'axios';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavbarComp from './components/NavbarComp';
-import Footer from './components/footer/Footer';
 
+import { Routes, Route } from 'react-router-dom';
+import Coins from './components/coins/Coins';
+import Coin from './routes/coin/Coin';
+import Footer from './components/footer/Footer';
+import NavbarComp from './components/NavbarComp';
 
 
 function App() {
@@ -18,7 +21,7 @@ function App() {
       .get(url)
       .then(response => {
         setCoins(response.data);
-        console.log(response.data[0])
+        // console.log(response.data[0])
       })
       .catch(error => {
         console.log(error);
@@ -26,11 +29,22 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <NavbarComp></NavbarComp>
-      hello there
-      <Footer></Footer>
-    </div>
+    // <div className="App">
+    //   <NavbarComp></NavbarComp>
+    //   <Coins />
+    //   <Footer></Footer>
+    // </div>
+    <>
+      <NavbarComp />
+      <Routes>
+        <Route path='/' element={<Coins coins={coins} />} />
+        <Route path='/coin' element={<Coin />}>
+          <Route path=':coinId' element={<Coin />} />
+        </Route>
+      </Routes>
+      <Footer />
+    </>
+
   );
 }
 
