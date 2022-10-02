@@ -10,6 +10,7 @@ import Coin from './routes/coin/Coin';
 import Footer from './components/footer/Footer';
 import NavbarComp from './components/NavbarComp';
 import NotFound from './routes/NotFound';
+import WalletComp from './components/WalletComp';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path='/coin' element={<Coin />}>
           <Route path=':coinId' element={<Coin />} />
         </Route>
+        <Route path='/wallet' element={<WalletComp/>} />
         <Route path='*' element={<NotFound/>} />
       </Routes>
       <Footer />
