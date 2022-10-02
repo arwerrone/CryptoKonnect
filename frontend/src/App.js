@@ -9,6 +9,7 @@ import Coins from './components/coins/Coins';
 import Coin from './routes/coin/Coin';
 import Footer from './components/footer/Footer';
 import NavbarComp from './components/NavbarComp';
+import NotFound from './routes/NotFound';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/coin' element={<Coin />}>
           <Route path=':coinId' element={<Coin />} />
         </Route>
+        <Route path='*' element={<NotFound/>} />
       </Routes>
       <Footer />
     </>
