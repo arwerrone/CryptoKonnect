@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Routes, Route } from 'react-router-dom';
 import Coins from './components/coins/Coins';
 import Coin from './routes/coin/Coin';
 import Footer from './components/footer/Footer';
 import NavbarComp from './components/NavbarComp';
 import NotFound from './routes/NotFound';
-import WalletComp from './components/WalletComp';
+import WalletComp from './components/wallet/WalletComp';
+import { Web3ReactProvider } from '@web3-react/core'
+import Web3 from 'web3'
 
+function getLibrary(provider) {
+  return new Web3(provider)
+}
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -31,12 +34,8 @@ function App() {
   }, []);
 
   return (
-    // <div className="App">
-    //   <NavbarComp></NavbarComp>
-    //   <Coins />
-    //   <Footer></Footer>
-    // </div>
-    <>
+
+    <Web3ReactProvider getLibrary={getLibrary}>
       <NavbarComp />
       <Routes>
         <Route path='/' element={<Coins coins={coins} />} />
@@ -47,7 +46,8 @@ function App() {
         <Route path='*' element={<NotFound/>} />
       </Routes>
       <Footer />
-    </>
+    </Web3ReactProvider>
+
 
   );
 }
