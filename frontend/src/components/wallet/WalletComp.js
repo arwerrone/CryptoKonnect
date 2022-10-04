@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { injected } from "./connectors";
 import {useWeb3React} from '@web3-react/core'
-
+import TokenListMainnet from '../../assets/token-list-mainnet.json'
+import TokenListPolygon from '../../assets/token-list-polygonmainnet.json'
 
 export default function WalletComp() {
 
@@ -37,6 +38,8 @@ export default function WalletComp() {
     }
     connectWalletOnPageLoad()
   }, [])
+
+  const [mainnet,setMainnet]= useState(0);
 
     return (
       <>
@@ -95,25 +98,33 @@ export default function WalletComp() {
             <Col sm={4}>
               <Card>
                 <Card.Header as="h5">User's Wallet</Card.Header>
-                <Card.Body>
+                <Card.Body className="text-center">
                   {active ? <Card.Title>{account}</Card.Title> : <Card.Title>NOT CONNECTED</Card.Title>}
 
-                  <Row>
-                    <Col>
-                      <Card.Text>Ethereum</Card.Text>
-                    </Col>
-                    <Col>
-                      <Card.Text>0.00</Card.Text>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <Card.Text>MATIC</Card.Text>
-                    </Col>
-                    <Col>
-                      <Card.Text>23.4567</Card.Text>
-                    </Col>
-                  </Row>
+                  <Form.Select value={mainnet} onChange={ e=> {setMainnet(e.target.value)}}>
+                    <option className="text-center">--Select Mainnet--</option>
+                    <option className="text-center" value="1">Ethereum Mainnet</option>
+                    <option className="text-center" value="2">Polygon Mainnet</option>
+                  </Form.Select>
+
+                  {mainnet === '1' && 
+                    TokenListMainnet.map((token) => (
+                      <Row>
+                        <Col>{token.name}</Col>
+                        <Col>AMOUNT</Col>
+                      </Row>
+                    ))
+                  }
+                  {mainnet === '2' &&
+                    TokenListPolygon.map((token) => (
+                      <Row>
+                        <Col>{token.name}</Col>
+                        <Col>AMOUNT</Col>
+                      </Row>
+                    ))
+                  }
+
+
 
                   {active ? <Button onClick={disconnect} variant="outline-primary">Disconnect Wallet</Button> :
                   <Button onClick={connect} variant="outline-primary">Connect Wallet</Button> }
