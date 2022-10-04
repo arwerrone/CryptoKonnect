@@ -1,0 +1,50 @@
+[
+    {
+      "name": "Dai Stablecoin (PoS)",
+      "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+      "symbol": "DAI",
+      "decimals": 18
+    },
+    {
+      "name": "Wrapped Ether",
+      "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+      "symbol": "WETH",
+      "decimals": 18
+    },
+    {
+      "name": "USDCoin (PoS)",
+      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+      "symbol": "USDC",
+      "decimals": 6
+    },
+    {
+      "name": "(PoS) Tether USD",
+      "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "name": "BNB",
+      "address": "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
+      "symbol": "BNB",
+      "decimals": 18
+    },
+    {
+      "name": "Binance USD",
+      "address": "0xdAb529f40E671A1D4bF91361c21bf9f0C9712ab7",
+      "symbol": "BUSD",
+      "decimals": 18
+    },
+    {
+      "name": "Matic Token",
+      "address": "0x0000000000000000000000000000000000001010",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
+    {
+      "name": "NFT Worlds",
+      "address": "0xD5d86FC8d5C0Ea1aC1Ac5Dfab6E529c9967a45E9",
+      "symbol": "WRLD",
+      "decimals": 18
+    }
+]
