@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Form, Stack,  } from "react-bootstrap";
 import { injected } from "./connectors";
 import {useWeb3React} from '@web3-react/core'
 import TokenListMainnet from '../../assets/token-list-mainnet.json'
 import TokenListPolygon from '../../assets/token-list-polygonmainnet.json'
+
+import useBalance from "../../actions/useBalance";
+
+
 
 export default function WalletComp() {
 
@@ -39,7 +43,11 @@ export default function WalletComp() {
     connectWalletOnPageLoad()
   }, [])
 
-  const [mainnet,setMainnet]= useState(0);
+  const [mainnet,setMainnet]= useState();
+  const [selectedToken, setSelectedToken] = useState(TokenListMainnet[0]);
+  const [balance] = useBalance(selectedToken.address, selectedToken.decimals)
+
+
 
     return (
       <>
@@ -99,6 +107,9 @@ export default function WalletComp() {
               <Card>
                 <Card.Header as="h5">User's Wallet</Card.Header>
                 <Card.Body className="text-center">
+
+                  <Stack gap={3}>
+
                   {active ? <Card.Title>{account}</Card.Title> : <Card.Title>NOT CONNECTED</Card.Title>}
 
                   <Form.Select value={mainnet} onChange={ e=> {setMainnet(e.target.value)}}>
@@ -107,28 +118,33 @@ export default function WalletComp() {
                     <option className="text-center" value="2">Polygon Mainnet</option>
                   </Form.Select>
 
-                  {mainnet === '1' && 
-                    TokenListMainnet.map((token) => (
-                      <Row>
-                        <Col>{token.name}</Col>
-                        <Col>AMOUNT</Col>
-                      </Row>
-                    ))
+                  {mainnet === '1' &&
+                      <><Form.Select onChange={e => { setSelectedToken(TokenListMainnet[e.target.value]); } }>
+                      {TokenListMainnet.map((token, index) => (
+                        <option value={index} key={token.address}>{token.name}</option>
+                      ))}
+                    </Form.Select>
+                    <Row><Col style={{fontWeight:"bold"}}>balance:</Col> <Col>{balance}</Col></Row>
+                    <Row><Col style={{fontWeight:"bold"}}>Symbol:</Col><Col>{selectedToken.symbol}</Col></Row>
+                    </>
                   }
+
                   {mainnet === '2' &&
-                    TokenListPolygon.map((token) => (
-                      <Row>
-                        <Col>{token.name}</Col>
-                        <Col>AMOUNT</Col>
-                      </Row>
-                    ))
+
+                    <><Form.Select onChange={e => { setSelectedToken(TokenListPolygon[e.target.value]); } }>
+                      {TokenListPolygon.map((token, index) => (
+                        <option value={index} key={token.address}>{token.name}</option>
+                      ))}
+                    </Form.Select>
+                    <Row><Col style={{fontWeight:"bold"}}>balance:</Col> <Col>{balance}</Col></Row>
+                    <Row><Col style={{fontWeight:"bold"}}>Symbol:</Col><Col>{selectedToken.symbol}</Col></Row>
+                    </>
                   }
-
-
 
                   {active ? <Button onClick={disconnect} variant="outline-primary">Disconnect Wallet</Button> :
                   <Button onClick={connect} variant="outline-primary">Connect Wallet</Button> }
                   
+                  </Stack>
 
                 </Card.Body>
               </Card>
