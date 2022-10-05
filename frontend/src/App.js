@@ -9,11 +9,11 @@ import Footer from './components/footer/Footer';
 import NavbarComp from './components/NavbarComp';
 import NotFound from './routes/NotFound';
 import WalletComp from './components/wallet/WalletComp';
-import { Web3ReactProvider } from '@web3-react/core'
-import Web3 from 'web3'
+import { Web3ReactProvider } from '@web3-react/core';
+import Web3 from 'web3';
 
 function getLibrary(provider) {
-  return new Web3(provider)
+  return new Web3(provider);
 }
 
 function App() {
@@ -34,21 +34,18 @@ function App() {
   }, []);
 
   return (
-
     <Web3ReactProvider getLibrary={getLibrary}>
       <NavbarComp />
       <Routes>
-        <Route path='/' element={<Coins coins={coins} />} />
-        <Route path='/coin' element={<Coin />}>
-          <Route path=':coinId' element={<Coin />} />
+        <Route path="/" element={<Coins coins={coins} />} />
+        <Route path="/coin" element={<Coin />}>
+          <Route path=":coinId" element={<Coin />} />
         </Route>
-        <Route path='/wallet' element={<WalletComp/>} />
-        <Route path='*' element={<NotFound/>} />
+        <Route path="/wallet" element={<WalletComp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Web3ReactProvider>
-
-
   );
 }
 
