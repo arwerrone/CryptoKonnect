@@ -4,7 +4,7 @@ import './Footer.css';
 export default class Footer extends Component {
   render() {
     return (
-      <footer>
+      <footer className='bg-gray-300'>
         <div className="content">
           <div className="top">
             <div className="logo-details">

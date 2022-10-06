@@ -24,7 +24,7 @@ const SigninPage = () => {
           </div>
           <button className='mt-5 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl'>Sign In</button>
         </form>
-        <p>
+        <p className='mb-5'>
           Don't have an account? <Link to="/signup">Sign up Now</Link>
         </p>
       </div>

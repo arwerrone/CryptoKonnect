@@ -42,5 +42,5 @@ code {
 
 /* round corner with box shadow */
 .round-corner {
-  @apply border bg-gray-300 rounded-3xl shadow-2xl px-3 w-full max-w-[1150px] mx-auto;
+  @apply border bg-gray-200 rounded-3xl shadow-2xl px-3 w-full max-w-[1150px] mx-auto;
 }
