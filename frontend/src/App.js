@@ -13,6 +13,7 @@ import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
 import Dashboard from './routes/Dashboard';
+import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
 
 function getLibrary(provider) {
