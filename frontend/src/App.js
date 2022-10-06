@@ -42,6 +42,7 @@ function App() {
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/compare' element={<CompareComp/>} />
         <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
           <Route path=":cryptoId" />
         </Route>
