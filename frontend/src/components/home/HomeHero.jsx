@@ -18,7 +18,7 @@ const HomeHero = () => {
       <h2 className="text-4xl">Top Trending</h2>
       <div className="grid grid-cols-3 gap-3">
         {hero.map(crypto => (
-          <div key={crypto.item.id} className="round-corner flex justify-between hover:scale-100 duration-200 ease-in-out">
+          <div key={crypto.item.id} className="round-corner flex justify-between hover:scale-105 duration-200 ease-in-out">
             <div className="flex items-center mx-1 w-full justify-between">
               <div className="flex">
                 <img className="h-20 mt-2 rounded-full mr-1 ml-1" src={crypto.item.small} alt="" />
