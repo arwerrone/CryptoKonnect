@@ -7,14 +7,14 @@ const HomeList = props => {
 
   return (
     <div className='round-corner my-3'>
-      <div className='flex flex-auto justify-between pt-3 pb-5'>
-        <h2 className='text-4xl'>Cryptocurrencies</h2>
+      <div className='flex flex-auto justify-between pt-3 pb-3'>
+        <h2 className='text-4xl'>Cryptocurrencies</h2>     
         <form>
           <input className = "bg-gray border border-input px-3 py-1 rounded-xl shadow-xl"
-          onChange={event => setKeyword(event.target.value)} type="text" placeholder="Type a Crypto" />
+          onChange={event => setKeyword(event.target.value)} type="text" placeholder="Find a Crypto" />
         </form>
       </div>
-
+      <p className='pb-4 text-xl'>Please click on the Star icon to add crypto(s) to your personal dashboard.</p>
       <table className="w-100 text-left">
         <thead>
           <tr className="border-b border-t">

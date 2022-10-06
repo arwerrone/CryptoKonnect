@@ -13,6 +13,7 @@ import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
 import Dashboard from './routes/Dashboard';
+import CryptoDetailPage from './routes/CryptoDetailPage';
 
 function getLibrary(provider) {
   return new Web3(provider);
@@ -41,6 +42,9 @@ function App() {
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
+          <Route path=":cryptoId" />
+        </Route>
 
         <Route path="/wallet" element={<WalletComp />} />
         <Route path="*" element={<NotFound />} />
