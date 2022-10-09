@@ -7,10 +7,10 @@ This project’s objective is to create a web application about crypto. This web
 Using this web app, users can save time on checking market prices from different sources and managing external digital wallets since all these tasks can be performed within this product.
 
 ## Developers
- **John Zhang**
- **Angelo Dikon Wong**
- **Thai Hoa Huynh**          
- **Tyler Barry**     
+ **John Zhang**  
+ **Angelo Dikon Wong**  
+ **Thai Hoa Huynh**            
+ **Tyler Barry**       
 
  
  
