@@ -15,6 +15,7 @@ import SignupPage from './routes/SignupPage';
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
+import { AccountContextProvider } from './context/Authentication';
 
 function getLibrary(provider) {
   return new Web3(provider);
@@ -37,6 +38,8 @@ function App() {
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
+      
+      <AccountContextProvider>
       <NavbarComp />
       <Routes>
         <Route path="/" element={<HomePage cryptos={cryptos} />} />
@@ -47,11 +50,11 @@ function App() {
         <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
           <Route path=":cryptoId" />
         </Route>
-
         <Route path="/wallet" element={<WalletComp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
+      </AccountContextProvider>
     </Web3ReactProvider>
   );
 }
