@@ -27,7 +27,7 @@ const SignupPage = () => {
   return (
     <div className="round-corner my-0 py-3">
       <div className="mx-auto max-w-[450px] px-5 py-18">
-        <h2 className="text-4xl">Sign Up</h2>
+        <h2 className="text-3xl">Sign Up a Free Account</h2>
 
         {error ? <p className="bg-red-300 p-3 my-2">{error}</p> : null}
         <form onSubmit={handleSubmit}>
