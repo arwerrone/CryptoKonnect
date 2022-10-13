@@ -153,7 +153,7 @@ export default function WalletComp() {
                   <Stack gap={3}>
 
                   {active ? <Card.Title>{account}</Card.Title> : <Card.Title>NOT CONNECTED</Card.Title>}
-TokenListMainnet[0]
+
                   <Form.Select value={mainnet} onChange={ e=> {setMainnet(e.target.value); setSelectedToken(TokenListMainnet[0]); setTokenImported(false);}}>
                     <option className="text-center">--Select Mainnet--</option>
                     <option className="text-center" value="1">Ethereum Mainnet</option>
