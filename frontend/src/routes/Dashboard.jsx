@@ -2,6 +2,7 @@ import React from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
 import { AccountAuth } from '../context/Authentication';
 import { Navigate, useNavigate } from 'react-router-dom';
+import ChatDashboard from '../components/dashboard/ChatDashboard';
 
 const Dashboard = () => {
   const { user, logOff } = AccountAuth();
@@ -38,6 +39,13 @@ const Dashboard = () => {
           <div className="w-full">
             <h2 className="text-4xl py-3">Alert List</h2>
             <AddedCrypto />
+          </div>
+        </div>
+
+        <div className="round-corner flex flex-auto justify-between items-center my-10 py-10">
+          <div className="w-full">
+            <h2 className="text-4xl py-3">Social</h2>
+            <ChatDashboard />
           </div>
         </div>
       </div>
