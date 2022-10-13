@@ -1,7 +1,7 @@
 import React from 'react'
 import GoogleButton from 'react-google-button'
 
-import {auth} from '../firebase'
+import {auth} from '../../firebase'
 import {GoogleAuthProvider, signInWithRedirect} from 'firebase/auth'
 
 const style = {
@@ -13,7 +13,7 @@ const googleSignIn = () => {
     signInWithRedirect(auth, provider)
 }
 
-const SignIn = () => {
+const ChatSignIn = () => {
   return (
     <div className={style.wrapper}>
         <GoogleButton onClick={googleSignIn} />
@@ -21,4 +21,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default ChatSignIn

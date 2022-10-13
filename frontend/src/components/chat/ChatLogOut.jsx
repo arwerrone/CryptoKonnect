@@ -1,12 +1,12 @@
 import React from 'react'
-import {auth} from '../firebase'
+import {auth} from '../../firebase'
 
 const style = {
     button: `bg-gray-200 px-4 py-2 hover:bg-gray-100`
 }
 
 
-const LogOut = () => {
+const ChatLogOut = () => {
 const signOut = () => {
     signOut(auth)
 }
@@ -18,4 +18,4 @@ const signOut = () => {
   )
 }
 
-export default LogOut
+export default ChatLogOut
