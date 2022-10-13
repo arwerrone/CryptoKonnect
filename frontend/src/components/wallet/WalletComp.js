@@ -16,7 +16,8 @@ export default function WalletComp() {
 
   async function connect() {
     try {
-      await activate(injected)
+      await activate(injected);
+      localStorage.setItem('isWalletConnected', true);
     }catch(err){
       console.log(err);
     }
@@ -24,7 +25,8 @@ export default function WalletComp() {
 
   async function disconnect() {
     try {
-      await deactivate()
+      await deactivate();
+      localStorage.setItem('isWalletConnected', false);
     }catch(err){
       console.log(err);
     }
@@ -34,14 +36,19 @@ export default function WalletComp() {
     const connectWalletOnPageLoad = async () => {
       if (localStorage?.getItem('isWalletConnected') === 'true') {
         try {
-          await activate(injected)
-          localStorage.setItem('isWalletConnected', true)
+          await activate(injected);
         } catch (ex) {
           console.log(ex)
         }
       }
     }
-    connectWalletOnPageLoad()
+
+    if (window.performance){
+      if (performance.navigation.type === 1){
+        connectWalletOnPageLoad();
+      }
+    }
+    connectWalletOnPageLoad();
   }, [])
 
   const [mainnet,setMainnet]= useState();
