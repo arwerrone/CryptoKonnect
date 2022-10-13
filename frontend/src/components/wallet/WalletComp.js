@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form, Stack,  } from "react-bootstrap";
 import { injected } from "./connectors";
 import {useWeb3React} from '@web3-react/core'
+import { ethers } from "ethers";
 import TokenListMainnet from '../../assets/token-list-mainnet.json'
 import TokenListPolygon from '../../assets/token-list-polygonmainnet.json'
-
 import useBalance from "../../actions/useBalance";
-
+import ErrorMessage from "./ErrorMessage";
+import TxList from "./TxList";
 
 
 export default function WalletComp() {
@@ -46,9 +47,47 @@ export default function WalletComp() {
   const [mainnet,setMainnet]= useState();
   const [selectedToken, setSelectedToken] = useState(TokenListMainnet[0]);
   const [balance] = useBalance(selectedToken.address, selectedToken.decimals)
+///////////////////////////////////////////////
+  const [error, setError] = useState();
+  const [txs, setTxs] = useState([]);
 
 
+const startPayment = async ({ setError, setTxs, ether, addr }) => {
+  try {
+    if (!window.ethereum){
+      throw new Error("No crypto wallet found. Please install it.");
+    }
 
+    await window.ethereum.send("eth_requestAccounts");
+    await activate(injected)
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    ethers.utils.getAddress(addr);
+    const tx = await signer.sendTransaction({
+      to: addr,
+      value: ethers.utils.parseEther(ether)
+    });
+    console.log({ ether, addr });
+    console.log("tx", tx);
+    setTxs([tx]);
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    setError();
+    await startPayment({
+      setError,
+      setTxs,
+      ether: data.get("amount"),
+      addr: data.get("addr")
+    });
+  };
+
+///////////////////////////////////////////////
     return (
       <>
         <Container>
@@ -56,52 +95,33 @@ export default function WalletComp() {
             <Col sm={8}>
               <Card>
                 <Card.Header as="h5">Send Crypto</Card.Header>
-                <Card.Body>
-                  <Form>
-                    <Form.Group className="mb-3">
-                      <Card.Title>Select Crypto</Card.Title>
-                      <Form.Select>
-                        <option className="text-center">Crypto - Network</option>
-                        <option className="text-center">MATIC - POLYGON</option>
-                        <option className="text-center">Ethereum - Ethereum</option>
-                      </Form.Select>
-                    </Form.Group>
+                <Card.Body className="text-center">
+                  <Form onSubmit={handleSubmit}>
+
                     <Form.Group className="mb-3">
                       <Card.Title>Destination Wallet Address</Card.Title>
-                      <Form.Control className="text-center" type="text" placeholder="0x5A5...b779"/>
+                      <Form.Control name="addr" className="text-center" type="text" placeholder="0x5A5...b779"/>
                     </Form.Group>
 
-                    <Row>
-                        <Col sm={5}>
-                            <Form.Control className="text-center" type="text" placeholder="Amount"/>
-                            <Card border="dark">
-                                <Card.Body>
-                                <Card.Title>Crypto Info</Card.Title>
-                                <Card.Text>MATIC - POLYGON</Card.Text>
-                                <Card.Text>0.00</Card.Text>
-                                <Card.Text>BTC 0.59%</Card.Text>
-                                <Card.Text>ETH 2.02%</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col sm={7}>
-                            <Card border="dark">
-                                <Card.Body>
-                                <Card.Title>Transaction Info</Card.Title>
-                                <Card.Text>Amount to send: 0.00</Card.Text>
-                                <Card.Text>Gas fee: 0.00</Card.Text>
-                                </Card.Body>
-                            </Card>
+                    <Form.Group className="mb-3">
+                      <Card.Title>Amount to send</Card.Title>
+                      <Form.Control name="amount" className="text-center" type="text" placeholder="0x5A5...b779"/>
+                    </Form.Group>
 
-                            <Button size="lg" variant="outline-primary" type="submit">Confirm Transaction</Button>
-                        </Col>
-                    </Row>
+                    <Button size="lg" variant="outline-primary" type="submit">Confirm Transaction</Button>
 
+                    <ErrorMessage message={error} />
+                    <TxList txs={txs} />
 
                   </Form>
+
                 </Card.Body>
               </Card>
             </Col>
+
+
+
+
 
             <Col sm={4}>
               <Card>
