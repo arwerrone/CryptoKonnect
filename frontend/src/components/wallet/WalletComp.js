@@ -105,7 +105,7 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 
                     <Form.Group className="mb-3">
                       <Card.Title>Amount to send</Card.Title>
-                      <Form.Control name="amount" className="text-center" type="text" placeholder="0x5A5...b779"/>
+                      <Form.Control name="amount" className="text-center" type="text" placeholder="0.00"/>
                     </Form.Group>
 
                     <Button size="lg" variant="outline-primary" type="submit">Confirm Transaction</Button>
