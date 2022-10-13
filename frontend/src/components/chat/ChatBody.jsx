@@ -27,7 +27,6 @@ const ChatBody = () => {
   return (
     <>
       <main className={style.main}>{messages && messages.map(message => <ChatMessage key={message.id} message={message} />)}</main>
-      {/* Send Message Compoenent */}
       <SendChatMessage scroll={scroll} />
       <span ref={scroll}></span>
     </>
