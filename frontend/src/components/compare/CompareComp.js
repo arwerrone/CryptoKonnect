@@ -1,7 +1,10 @@
 
 import axios from 'axios'
 import React, { Fragment, useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
 import { ReactDOM } from 'react-dom';
+
+
 
 //import CoinCompare from './CoinCompare'
 
@@ -118,10 +121,15 @@ import { ReactDOM } from 'react-dom';
 //         )
 //     }
 // }
+var rerender1 = true, rerender2 = true
+var prev1 = "0", prev2 = "0"
 
-function CompareComp() {
+const CompareComp = props => {
     const [coin, setCoin] = useState([])
+    const [coin1, setCoin1] = useState([])
+    const [coin2, setCoin2] = useState([])
     const [state, setState] = useState([])
+    const [state2, setState2] = useState([])
 
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/list`).then((res) => {
@@ -131,6 +139,32 @@ function CompareComp() {
         })
     }, [])
 
+    //function SetWindow1(selectedcoin) {
+    const SetWindow1 = (selectedcoin) => {
+        console.log("Calling API")
+        useEffect(() => {
+            axios.get(`https://api.coingecko.com/api/v3/coins/${selectedcoin}`).then((res) => {
+                console.log("In API");
+                setCoin1(res.data);
+            }).catch((error) => {
+                console.log(error)
+            })
+        },)
+        console.log("In API");
+    }
+
+    //function SetWindow2(selectedcoin){
+    function SetWindow2(selectedcoin) {
+        useEffect(() => {
+            axios.get(`https://api.coingecko.com/api/v3/coins/${selectedcoin}`).then((res) => {
+                setCoin2(res.data)
+                //console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+        }, [])
+    }//
+
     return (
         <>
             <div>
@@ -138,44 +172,62 @@ function CompareComp() {
                     <h1>Comparisons </h1>
                 </div>
 
-                <table>
-                    <select id="coin1" onChange={(e => { setState({ selectedCoin: e.target.value }) })}>
-                        <option key="0" value="0">---Select Coin 1---</option>
-                        {coin.map((coinget) => (
-                            <option key={coinget.id} value={coinget.id}>
-                                {coinget.name}
-                            </option>
-                        ))
-                        }
-                    </select>
-                    <select id="coin2">
-                        <option key="0" value="0">---Select Coin 2---</option>
+                <div className="row">
+                    <div className="col-sm-6">
+                        <select id="coin1" onChange={(e => { setState({ selectedCoin1: e.target.value }) })}>
+                            <option key="0" value="0">---Select Coin 1---</option>
+                            {coin.map((coinget) => (
+                                <option key={coinget.id} value={coinget.id}>
+                                    {coinget.name}
+                                </option>
+                            ))
+                            }
+                        </select>
+                        {renderSelectedCoin1(state.selectedCoin1)}
 
-                        {coin.map((coinget) => (
-                            <option key={coinget.id} value={coinget.id}>
-                                {coinget.name}
-                            </option>
-                        ))
-                        }
-                    </select>
-                </table>
-                {renderSelectedCoin1(state.selectedCoin)}
-                <table>
 
-                </table>
+                    </div>
+
+                    <div className="col-sm-6">
+                        <select id="coin2" onChange={(e => { setState2({ selectedCoin2: e.target.value }) })}>
+                            <option key="0" value="0">---Select Coin 2---</option>
+                            {coin.map((coinget) => (
+                                <option key={coinget.id} value={coinget.id}>
+                                    {coinget.name}
+                                </option>
+                            ))
+                            }
+                        </select>
+                        {renderSelectedCoin1(state2.selectedCoin2)}
+                    </div>
+                </div>
 
             </div>
         </>
     )
 
+
+
     function renderSelectedCoin1(selectedcoin) {
 
-        if (selectedcoin !== "0") {
+        if (selectedcoin !== "0" && selectedcoin) {
 
-            
-            return (
-                selectedcoin
-            )
+            console.log(selectedcoin)
+            //console.log(props.crypto.map)
+
+            if (prev1 !== selectedcoin) {
+                prev1 = selectedcoin
+                rerender1 = true
+            }
+
+            if (rerender1) {
+                rerender1 = false
+                console.log("setting window")
+                SetWindow1(selectedcoin)
+
+            }
+
+
 
         }
 
