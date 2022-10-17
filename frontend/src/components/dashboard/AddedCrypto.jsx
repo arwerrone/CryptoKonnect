@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { AccountAuth } from '../../context/Authentication';
 
@@ -10,16 +9,19 @@ const AddedCrypto = () => {
   const { user } = AccountAuth();
 
   useEffect(() => {
-    onSnapshot(doc(db, 'users', `${user?.email}`), doc => {
-      setCryptos(doc.data()?.alertList);
-    });
+    db.collection('users')
+      .doc(`${user?.email}`)
+      .onSnapshot(doc => {
+        setCryptos(doc.data()?.alertList);
+      });
   }, [user?.email]);
 
-  const cryptoPath = doc(db, 'users', `${user?.email}`);
+  const cryptoPath = db.collection("users").doc(`${user?.email}`)
+
   const deleteCrypto = async selectedId => {
     try {
       const result = cryptos.filter(coin => coin.id !== selectedId);
-      await updateDoc(cryptoPath, {
+      await cryptoPath.update({
         alertList: result
       });
     } catch (e) {

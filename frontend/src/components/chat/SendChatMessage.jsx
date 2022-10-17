@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { auth, db } from '../../firebase';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+// import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import firebase from 'firebase';
 
 const style = {
   form: `h-14 w-full max-w-[728px]  flex text-xl relative bottom-0`,
@@ -18,11 +19,16 @@ const SendChatMessage = ({ scroll }) => {
       return;
     }
     const { uid, displayName } = auth.currentUser;
-    await addDoc(collection(db, 'messages'), {
+    await 
+    // addDoc(collection(db, 'messages'), 
+    db.collection("messages").add(    
+    {
       text: input,
-      name: displayName,
+      // name: displayName,
+      name: firebase.auth().currentUser.email,
       uid,
-      timestamp: serverTimestamp()
+      // timestamp: serverTimestamp()
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     setInput('');
     scroll.current.scrollIntoView({ behavior: 'smooth' });

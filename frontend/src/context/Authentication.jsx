@@ -1,8 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-
-import { doc, setDoc } from 'firebase/firestore';
 
 const AccountContext = createContext();
 
@@ -10,22 +7,22 @@ export const AccountContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   // attempt to signup and set the alert list to an empty array if succeeded
-  const signUp = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
-    return setDoc(doc(db, 'users', email), {
+  const signUp = async (email, password) => {
+    await auth.createUserWithEmailAndPassword(email, password);
+    return await db.collection('users').doc(email).set({
       alertList: []
     });
   };
-  const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const signIn = async (email, password) => {
+    return await auth.signInWithEmailAndPassword(email, password);
   };
 
   const logOff = () => {
-    return signOut(auth);
+    return auth.signOut();
   };
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, currentAccount => {
+    const unsub = auth.onAuthStateChanged(currentAccount => {
       setUser(currentAccount);
     });
     return () => {

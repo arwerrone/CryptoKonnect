@@ -5,18 +5,19 @@ import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 import { AccountAuth } from '../../context/Authentication';
 import { db } from '../../firebase';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import firebase from 'firebase/app';
 
 const SingleCrypto = props => {
   const [addedCrypto, setAddedCrypto] = useState(false);
   const { user } = AccountAuth();
 
-  const cryptoPath = doc(db, 'users', `${user?.email}`);
+  const cryptoPath = db.collection('users').doc(`${user?.email}`);
+
   const addCrypto = async () => {
     if (user?.email) {
       setAddedCrypto(true);
-      await updateDoc(cryptoPath, {
-        alertList: arrayUnion({
+      await cryptoPath.update({
+        alertList: firebase.firestore.FieldValue.arrayUnion({
           id: props.crypto.id,
           name: props.crypto.name,
           image: props.crypto.image,
