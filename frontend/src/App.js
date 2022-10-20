@@ -12,10 +12,27 @@ import Web3 from 'web3';
 import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
-import Dashboard from './routes/Dashboard';
+// import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
 import { AccountContextProvider } from './context/Authentication';
+
+// import SocialApp from './SocialApp';
+import { BrowserRouter, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+
+// styles
+import './App.css';
+
+// pages & components
+import SocialDashboard from './pages/dashboard/Dashboard';
+import Create from './pages/create/Create';
+import SocialLogin from './pages/login/Login';
+import SocialSignup from './pages/signup/Signup';
+import Project from './pages/project/Project';
+import SocialNavbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import OnlineUsers from './components/OnlineUsers';
 
 function getLibrary(provider) {
   return new Web3(provider);
@@ -36,9 +53,11 @@ function App() {
       });
   }, [urlStr]);
 
+  //
+  const { authIsReady, user } = useAuthContext();
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      
+    /*
+    <Web3ReactProvider getLibrary={getLibrary}>      
       <AccountContextProvider>
       <NavbarComp />
       <Routes>
@@ -51,11 +70,35 @@ function App() {
           <Route path=":cryptoId" />
         </Route>
         <Route path="/wallet" element={<WalletComp />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />        
       </Routes>
       <Footer />
-      </AccountContextProvider>
+      </AccountContextProvider> 
     </Web3ReactProvider>
+*/
+
+    <>
+      {authIsReady && (
+        // <BrowserRouter>
+
+        <>
+          <NavbarComp />
+
+          <div className="App">
+            <Routes>
+              <Route path="/" element={user ? <SocialDashboard /> : <Navigate to="/login" />} />
+              <Route path="/social" element={user ? <SocialDashboard /> : <Navigate to="/login" />} />
+              <Route path="/create" element={user ? <Create /> : <Navigate to="/login" />} />
+              <Route path="/projects/:id" element={user ? <Project /> : <Navigate to="/login" />} />
+              <Route path="/login" element={user ? <Navigate to="/social" /> : <SocialLogin />} />
+              <Route path="/socialsignup" element={user ? <Navigate to="/social" /> : <SocialSignup />} />
+            </Routes>
+          </div>
+
+          <Footer />
+        </>
+      )}
+    </>
   );
 }
 
