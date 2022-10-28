@@ -1,12 +1,12 @@
 import { useState } from 'react';
-// import { useSignup } from '../../../hooks/useSocialSignup';
-import { useSignup } from '../../src/hooks/useSocialSignup';
+import { useSignup } from '../../../hooks/useSocialSignup';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 
+import Navbar from '../../../components/social/SocialNavbar';
 // styles
-import '../../src/routes/social/socialSignup/SocialSignup.css';
+import './SocialSignup.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -15,12 +15,10 @@ export default function Signup() {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailError, setThumbnailError] = useState(null);
   const { signup, isPending, error } = useSignup();
-  const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    await signup(email, password, displayName, thumbnail);
-    navigate('/dashboard');
+    signup(email, password, displayName, thumbnail);
   };
 
   const handleFileChange = e => {
@@ -48,7 +46,8 @@ export default function Signup() {
 
   return (
     <>
-      <div className="round-corner mt-0 py-4">
+      <Navbar />
+      <div className="round-corner mt-4 py-4">
         <div className="mx-auto max-w-[450px] px-5 py-18">
           <h2 className="text-4xl">Sign Up</h2>
 

@@ -17,6 +17,16 @@ import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
 import { AccountContextProvider } from './context/Authentication';
 
+import { Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useSocialAuthContext';
+
+// social functions
+import SocialDashboard from './routes/social/socialDashboard/SocialDashboard';
+import Create from './routes/social/socialCreate/SocialCreate';
+import SocialLogin from './routes/social/socialLogin/SocialLogin';
+import SocialSignup from './routes/social/socialSignup/SocialSignup';
+import Post from './routes/social/socialPost/SocialPost';
+
 function getLibrary(provider) {
   return new Web3(provider);
 }
@@ -36,24 +46,30 @@ function App() {
       });
   }, [urlStr]);
 
+  const { authIsReady, user } = useAuthContext();
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      
       <AccountContextProvider>
-      <NavbarComp />
-      <Routes>
-        <Route path="/" element={<HomePage cryptos={cryptos} />} />
-        <Route path="/signin" element={<SigninPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path='/compare' element={<CompareComp/>} />
-        <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
-          <Route path=":cryptoId" />
-        </Route>
-        <Route path="/wallet" element={<WalletComp />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+        <NavbarComp />
+        <Routes>
+          <Route path="/" element={<HomePage cryptos={cryptos} />} />
+          <Route path="/signin" element={<SigninPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/compare" element={<CompareComp />} />
+          <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
+            <Route path=":cryptoId" />
+          </Route>
+          <Route path="/wallet" element={<WalletComp />} />
+          <Route path="*" element={<NotFound />} />
+
+          <Route path="/social" element={user ? <SocialDashboard /> : <Navigate to="/socialsignin" />} />
+          <Route path="/create" element={user ? <Create /> : <Navigate to="/socialsignin" />} />
+          <Route path="/posts/:id" element={user ? <Post /> : <Navigate to="/socialsignin" />} />
+          <Route path="/socialsignin" element={user ? <Navigate to="/social" /> : <SocialLogin />} />
+          <Route path="/socialsignup" element={user ? <Navigate to="/social" /> : <SocialSignup />} />
+        </Routes>
+        <Footer />
       </AccountContextProvider>
     </Web3ReactProvider>
   );

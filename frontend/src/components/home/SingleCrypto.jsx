@@ -11,10 +11,12 @@ const SingleCrypto = props => {
   const [addedCrypto, setAddedCrypto] = useState(false);
   const { user } = AccountAuth();
 
-  const cryptoPath = db.collection('users').doc(`${user?.email}`);
+  // const cryptoPath = db.collection('users').doc(`${user?.email}`);
+  const cryptoPath = db.collection('users').doc(`${user?.uid}`);
 
   const addCrypto = async () => {
-    if (user?.email) {
+    // if (user?.email) {
+    if (user?.uid) {
       setAddedCrypto(true);
       await cryptoPath.update({
         alertList: firebase.firestore.FieldValue.arrayUnion({

@@ -10,13 +10,14 @@ const AddedCrypto = () => {
 
   useEffect(() => {
     db.collection('users')
-      .doc(`${user?.email}`)
+      // .doc(`${user?.email}`)
+      .doc(`${user?.uid}`)
       .onSnapshot(doc => {
         setCryptos(doc.data()?.alertList);
       });
-  }, [user?.email]);
+  }, [user?.uid]);
 
-  const cryptoPath = db.collection("users").doc(`${user?.email}`)
+  const cryptoPath = db.collection('users').doc(`${user?.uid}`);
 
   const deleteCrypto = async selectedId => {
     try {
