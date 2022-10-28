@@ -53,7 +53,7 @@ function App() {
         <NavbarComp />
         <Routes>
           <Route path="/" element={<HomePage cryptos={cryptos} />} />
-          <Route path="/signin" element={<SigninPage />} />
+          <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/compare" element={<CompareComp />} />
