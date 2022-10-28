@@ -1,28 +1,28 @@
 import React from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
 import { AccountAuth } from '../context/Authentication';
-// import { Navigate, useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import ChatDashboard from '../components/dashboard/ChatDashboard';
 import { Link } from 'react-router-dom';
 
 import { useLogout } from '../../src/hooks/useSocialLogout';
+// import { Navigate, useNavigate } from 'react-router-dom';
 // import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
 
 const Dashboard = () => {
   // const { user, logOff } = AccountAuth();
   const { user } = AccountAuth();
   // const navigate = useNavigate();
-
-  // attempt to logOff and redirect to homepage if succeeded
-  // const handlelogOff = async () => {
-  //   try {
-  //     await logOff();
-  //     navigate('/');
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
+  /*
+  const handlelogOff = async () => {
+    try {
+      await logOff();
+      navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+*/
   const { logout, isPending } = useLogout();
 
   if (user) {
@@ -38,20 +38,20 @@ const Dashboard = () => {
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
               <li className="px-2">
-                <Link className="btn mt-3 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" to="/social">
+                <Link className="btn bg-primary text-white" to="/social">
                   Crypto Social
                 </Link>
               </li>
 
               <li className="px-2">
                 {!isPending && (
-                  <button onClick={logout} className="mt-3 mb-3 p-2 w-full bg-secondary text-white rounded-xl shadow-2xl">
-                    Log Out
+                  <button onClick={logout} className="btn bg-secondary text-white">
+                    Sign Out
                   </button>
                 )}
 
                 {isPending && (
-                  <button className="mt-3 mb-3 p-2 w-full bg-secondary text-white rounded-xl shadow-2xl" disabled>
+                  <button className="btn bg-secondary text-white" disabled>
                     Logging out...
                   </button>
                 )}
