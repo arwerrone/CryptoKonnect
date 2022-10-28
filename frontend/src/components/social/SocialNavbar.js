@@ -45,6 +45,7 @@ export default function Navbar() {
                   Logout
                 </button>
               )}
+
               {isPending && (
                 <button className="btn" disabled>
                   Logging out...

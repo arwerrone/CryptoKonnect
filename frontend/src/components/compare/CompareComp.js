@@ -149,7 +149,7 @@ const CompareComp = props => {
             }).catch((error) => {
                 console.log(error)
             })
-        },)
+        }, [])
         console.log("In API");
     }
 

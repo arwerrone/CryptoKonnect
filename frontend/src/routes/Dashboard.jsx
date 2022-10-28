@@ -1,23 +1,29 @@
 import React from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
 import { AccountAuth } from '../context/Authentication';
-import { Navigate, useNavigate } from 'react-router-dom';
+// import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import ChatDashboard from '../components/dashboard/ChatDashboard';
 import { Link } from 'react-router-dom';
 
+import { useLogout } from '../../src/hooks/useSocialLogout';
+// import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
+
 const Dashboard = () => {
-  const { user, logOff } = AccountAuth();
-  const navigate = useNavigate();
+  // const { user, logOff } = AccountAuth();
+  const { user } = AccountAuth();
+  // const navigate = useNavigate();
 
   // attempt to logOff and redirect to homepage if succeeded
-  const handlelogOff = async () => {
-    try {
-      await logOff();
-      navigate('/');
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+  // const handlelogOff = async () => {
+  //   try {
+  //     await logOff();
+  //     navigate('/');
+  //   } catch (e) {
+  //     console.log(e.message);
+  //   }
+  // };
+  const { logout, isPending } = useLogout();
 
   if (user) {
     return (
@@ -31,15 +37,24 @@ const Dashboard = () => {
           </div>
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
-              <li className='px-2'>
+              <li className="px-2">
                 <Link className="btn mt-3 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" to="/social">
                   Crypto Social
                 </Link>
               </li>
-              <li className='px-2'>
-                <button onClick={handlelogOff} className="mt-3 mb-3 p-2 w-full bg-secondary text-white rounded-xl shadow-2xl">
-                  Log Out
-                </button>
+
+              <li className="px-2">
+                {!isPending && (
+                  <button onClick={logout} className="mt-3 mb-3 p-2 w-full bg-secondary text-white rounded-xl shadow-2xl">
+                    Log Out
+                  </button>
+                )}
+
+                {isPending && (
+                  <button className="mt-3 mb-3 p-2 w-full bg-secondary text-white rounded-xl shadow-2xl" disabled>
+                    Logging out...
+                  </button>
+                )}
               </li>
             </ul>
           </div>
