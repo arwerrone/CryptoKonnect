@@ -38,7 +38,7 @@ const Dashboard = () => {
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
               <li className="px-2">
-                <Link className="btn bg-primary text-white" to="/social">
+                <Link className="btn bg-white border-primary text-primary" to="/social">
                   Crypto Social
                 </Link>
               </li>

@@ -7,7 +7,8 @@ import { useAuthContext } from '../../../hooks/useSocialAuthContext';
 // import ProjectFilter from './PostFilter';
 
 // import NavbarComp from '../../../components/NavbarComp';
-import Navbar from '../../../components/social/SocialNavbar';
+// import Navbar from '../../../components/social/SocialNavbar';
+import SocialChatNavbar from '../../../components/social/SocialChatNavbar';
 
 import Sidebar from '../../../components/social/SocialSidebar';
 import OnlineUsers from '../../../components/social/OnlineSocialUsers';
@@ -53,7 +54,7 @@ export default function Dashboard() {
       {user && <Sidebar />}
 
       <div className="container">
-        <Navbar />
+        <SocialChatNavbar />
         <div className='py-4'>
           <div className='chat-comments'>
             <ChatDashboard />

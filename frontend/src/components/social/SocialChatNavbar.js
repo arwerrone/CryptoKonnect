@@ -19,13 +19,13 @@ export default function Navbar() {
         {!user && (
           <>
             <li>
-              <Link className="btn bg-white text-primary border-primary" to="/socialsignin">
+              <Link className="btn bg-primary text-white" to="/socialsignin">
                 Sign In
               </Link>
             </li>
 
             <li>
-              <Link className="btn bg-white text-primary border-primary" to="/socialsignup">
+              <Link className="btn bg-primary text-white" to="/socialsignup">
                 Sign Up
               </Link>
             </li>
@@ -35,8 +35,8 @@ export default function Navbar() {
         {user && (
           <>
             <li>
-              <Link className="btn bg-white border-primary text-primary" to="/chat">
-                Live Chat
+              <Link className="btn bg-primary text-white" to="/chat">
+              <strong>Live Chat</strong>
               </Link>
             </li>
 
