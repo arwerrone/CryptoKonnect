@@ -21,34 +21,20 @@ export default function Login() {
 
   return (
     <>
-
-
-
       <Navbar />
       <div className="round-corner mt-4 py-4">
         <div className="mx-auto max-w-[450px] px-5 py-18">
           <h2 className="text-4xl">Sign In</h2>
 
-
-
-
           <form onSubmit={handleSubmit} className="round-corner my-0">
-
-
             <div className="my-0">
               <label>Email</label>
-
 
               <div className="w-full relative my-0 shadow-xl rounded-xl">
                 <input required type="email" onChange={e => setEmail(e.target.value)} value={email} className="w-full bg-gray border border-input px-3 py-2 shadow-xl rounded-xl" />
                 <AiOutlineMail className="right-3 top-3 absolute text-black-300" />
-
               </div>
             </div>
-
-
-
-
 
             <div className="my-0">
               <label>Password</label>
@@ -58,14 +44,7 @@ export default function Login() {
 
                 <AiFillLock className="right-3 top-3 absolute text-black-300" />
               </div>
-
             </div>
-
-
-
-
-
-
 
             {!isPending && <button className="mt-5 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl">Sign in</button>}
             {isPending && (
@@ -75,10 +54,6 @@ export default function Login() {
             )}
             {error && <div className="error">{error}</div>}
           </form>
-
-
-
-
 
           <p className="mb-5">
             Don't have an account? <Link to="/signup">Sign up Now</Link>

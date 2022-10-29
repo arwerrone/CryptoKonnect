@@ -7,7 +7,7 @@ import { useFirestore } from '../../../hooks/useSocialFirestore';
 import Avatar from '../../../components/social/SocialAvatar';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-export default function ProjectComments({ project }) {
+export default function PostComments({ post }) {
   const { user } = useAuthContext();
   const { updateDocument, response } = useFirestore('posts');
   const [newComment, setNewComment] = useState('');
@@ -23,8 +23,8 @@ export default function ProjectComments({ project }) {
       id: Math.random()
     };
 
-    await updateDocument(project.id, {
-      comments: [...project.comments, commentToAdd]
+    await updateDocument(post.id, {
+      comments: [...post.comments, commentToAdd]
     });
     if (!response.error) {
       setNewComment('');
@@ -37,8 +37,8 @@ export default function ProjectComments({ project }) {
         <div className="project-comments">
           <ul>
             <h4>Post Comments</h4>
-            {project.comments.length > 0 &&
-              project.comments.map(comment => (
+            {post.comments.length > 0 &&
+              post.comments.map(comment => (
                 <li key={comment.id}>
                   <div className="comment-author">
                     <Avatar src={comment.photoURL} />

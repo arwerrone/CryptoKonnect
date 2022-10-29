@@ -12,7 +12,7 @@ import OnlineUsers from '../../../components/social/OnlineSocialUsers';
 // styles
 import './SocialPost.css';
 
-export default function Project() {
+export default function Post() {
   const { id } = useParams();
   const { document, error } = useDocument('posts', id);
 
@@ -29,8 +29,8 @@ export default function Project() {
       <div className="container">
         <Navbar />
         <div className="project-details">
-          <PostSummary project={document} />
-          <PostComments project={document} />
+          <PostSummary post={document} />
+          <PostComments post={document} />
         </div>
       </div>
       <OnlineUsers />

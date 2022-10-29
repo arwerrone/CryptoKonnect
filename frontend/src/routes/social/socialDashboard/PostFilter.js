@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const filterList = ['all', 'mine', 'Cryptocurrencies', 'Exchanges', 'NFTs', 'Stablecoins']
 
-export default function ProjectFilter({ changeFilter }) {
+export default function PostFilter({ changeFilter }) {
   const [currentFilter, setCurrentFilter] = useState('all')
 
   const handleClick = (newFilter) => {

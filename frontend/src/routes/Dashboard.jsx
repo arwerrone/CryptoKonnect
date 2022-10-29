@@ -38,14 +38,14 @@ const Dashboard = () => {
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
               <li className="px-2">
-                <Link className="btn bg-white border-primary text-primary" to="/social">
+                <Link className="shadow-xl btn bg-primary text-white" to="/social">
                   Crypto Social
                 </Link>
               </li>
 
               <li className="px-2">
                 {!isPending && (
-                  <button onClick={logout} className="btn bg-secondary text-white">
+                  <button onClick={logout} className="shadow-xl btn bg-danger text-white">
                     Sign Out
                   </button>
                 )}

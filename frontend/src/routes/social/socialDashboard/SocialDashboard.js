@@ -4,7 +4,7 @@ import { useAuthContext } from '../../../hooks/useSocialAuthContext';
 
 // components
 import PostList from '../../../components/social/PostList';
-import ProjectFilter from './PostFilter';
+import PostFilter from './PostFilter';
 
 // import NavbarComp from '../../../components/NavbarComp';
 import Navbar from '../../../components/social/SocialNavbar';
@@ -57,7 +57,7 @@ export default function Dashboard() {
         <Navbar />
         <h4>Posts</h4>
         {error && <p className="error">{error}</p>}
-        {documents && <ProjectFilter changeFilter={changeFilter} />}
+        {documents && <PostFilter changeFilter={changeFilter} />}
         {posts && <PostList posts={posts} />}
       </div>
 

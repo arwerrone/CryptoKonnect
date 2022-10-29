@@ -76,7 +76,7 @@ export default function Create() {
       id: user.uid
     };
 
-    const project = {
+    const post = {
       name,
       details,
       assignedUsersList,
@@ -86,7 +86,7 @@ export default function Create() {
       comments: []
     };
 
-    await addDocument(project);
+    await addDocument(post);
     if (!response.error) {
       // history.push('/')
       navigate('/social');

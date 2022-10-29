@@ -10,16 +10,16 @@ export default function ProjectList({ posts }) {
   return (
     <div className="project-list">
       {posts.length === 0 && <p>No Posts yet!</p>}
-      {posts.map(project => (
-        <Link className="round-corner pt-0" to={`/posts/${project.id}`} key={project.id}>
-          <h4><strong>{project.name}</strong></h4>
-          <p>Posted on {project.dueDate.toDate().toDateString()}</p>
+      {posts.map(post => (
+        <Link className="round-corner pt-0" to={`/posts/${post.id}`} key={post.id}>
+          <h4><strong>{post.name}</strong></h4>
+          <p>Posted on {post.dueDate.toDate().toDateString()}</p>
           <div className="assigned-to">
             <p>
               <strong>Tagged to:</strong>
             </p>
             <ul>
-              {project.assignedUsersList.map(user => (
+              {post.assignedUsersList.map(user => (
                 <li key={user.photoURL}>
                   <Avatar src={user.photoURL} />
                 </li>
