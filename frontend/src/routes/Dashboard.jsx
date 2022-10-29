@@ -2,7 +2,7 @@ import React from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
 import { AccountAuth } from '../context/Authentication';
 import { Navigate } from 'react-router-dom';
-import ChatDashboard from '../components/dashboard/ChatDashboard';
+// import ChatDashboard from '../components/dashboard/ChatDashboard';
 import { Link } from 'react-router-dom';
 
 import { useLogout } from '../../src/hooks/useSocialLogout';
@@ -66,14 +66,17 @@ const Dashboard = () => {
             <AddedCrypto />
           </div>
         </div>
-
+      
+        {/* 
         <div className="round-corner flex flex-auto justify-between items-center my-10 py-10">
           <div className="w-full">
             <h2 className="text-4xl py-3">Social</h2>
             <ChatDashboard />
           </div>
-        </div>
+        </div> 
+        */}
       </div>
+      
     );
   } else {
     return <Navigate to="/signin" />;

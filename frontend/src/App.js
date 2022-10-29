@@ -26,6 +26,7 @@ import Create from './routes/social/socialCreate/SocialCreate';
 import SocialLogin from './routes/social/socialLogin/SocialLogin';
 import SocialSignup from './routes/social/socialSignup/SocialSignup';
 import Post from './routes/social/socialPost/SocialPost';
+import SocialChat from './routes/social/socialChat/SocialChat';
 
 function getLibrary(provider) {
   return new Web3(provider);
@@ -46,7 +47,8 @@ function App() {
       });
   }, [urlStr]);
 
-  const { authIsReady, user } = useAuthContext();
+  // const { authIsReady, user } = useAuthContext();
+  const { user } = useAuthContext();
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <AccountContextProvider>
@@ -66,8 +68,13 @@ function App() {
           <Route path="/social" element={user ? <SocialDashboard /> : <Navigate to="/socialsignin" />} />
           <Route path="/create" element={user ? <Create /> : <Navigate to="/socialsignin" />} />
           <Route path="/posts/:id" element={user ? <Post /> : <Navigate to="/socialsignin" />} />
+          <Route path="/chat" element={<SocialChat />} />
+
+
           <Route path="/socialsignin" element={user ? <Navigate to="/social" /> : <SocialLogin />} />
           <Route path="/socialsignup" element={user ? <Navigate to="/social" /> : <SocialSignup />} />
+
+
         </Routes>
         <Footer />
       </AccountContextProvider>

@@ -19,13 +19,14 @@ export default function Navbar() {
         {!user && (
           <>
             <li>
-              <Link className="btn bg-secondary text-white" to="/dashboard">
-                Dashboard
+              <Link className="btn bg-primary text-white" to="/socialsignin">
+                Sign In
               </Link>
             </li>
+
             <li>
               <Link className="btn bg-primary text-white" to="/socialsignup">
-                Signup
+                Sign Up
               </Link>
             </li>
           </>
@@ -34,15 +35,15 @@ export default function Navbar() {
         {user && (
           <>
             <li>
-              <Link className="btn bg-primary text-white" to="/dashboard">
-                Dashboard
+              <Link className="btn bg-primary text-white" to="/chat">
+                Live Chat
               </Link>
             </li>
 
             <li>
               {!isPending && (
                 <button className="btn bg-secondary text-white" onClick={logout}>
-                  Logout
+                  Sign Out
                 </button>
               )}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatSignIn from './ChatSignIn';
-import ChatLogOut from './ChatLogOut';
+// import ChatLogOut from './ChatLogOut';
 import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 const style = {
@@ -14,7 +14,7 @@ const ChatNavbar = () => {
   return (
     <div className={style.nav}>
       <h1 className={style.heading}>Crypto Chat</h1>
-      {user ? <ChatLogOut /> : <ChatSignIn />}
+      {!user && <ChatSignIn />}
     </div>
   );
 };
