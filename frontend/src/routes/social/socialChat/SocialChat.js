@@ -55,7 +55,9 @@ export default function Dashboard() {
       <div className="container">
         <Navbar />
         <div className='py-4'>
-          <ChatDashboard />
+          <div className='chat-comments'>
+            <ChatDashboard />
+          </div>
         </div>
         {/* {error && <p className="error">{error}</p>} */}
         {/* {documents && <ProjectFilter changeFilter={changeFilter} />} */}

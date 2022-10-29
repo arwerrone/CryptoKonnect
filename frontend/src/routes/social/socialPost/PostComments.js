@@ -59,7 +59,7 @@ export default function ProjectComments({ project }) {
                 <span>Add new comment:</span>
                 <textarea onChange={e => setNewComment(e.target.value)} value={newComment}></textarea>
               </label>
-              <button className="btn bg-primary">Add Comment</button>
+              <button className="btn bg-primary text-white">Add Comment</button>
             </form>
           </ul>
         </div>

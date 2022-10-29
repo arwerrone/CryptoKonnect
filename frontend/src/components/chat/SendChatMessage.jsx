@@ -18,7 +18,8 @@ const SendChatMessage = ({ scroll }) => {
       alert('Please enter a valid message');
       return;
     }
-    const { uid, displayName } = auth.currentUser;
+    // const { uid, displayName } = auth.currentUser;
+    const { uid  } = auth.currentUser;
     await 
     // addDoc(collection(db, 'messages'), 
     db.collection("messages").add(    

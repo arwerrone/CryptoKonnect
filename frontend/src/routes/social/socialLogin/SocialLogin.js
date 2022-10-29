@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useLogin } from '../../../hooks/useSocialLogin';
 
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 
 import Navbar from '../../../components/social/SocialNavbar';

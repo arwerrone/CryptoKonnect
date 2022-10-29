@@ -41,3 +41,24 @@
 .App .container h4 {
   margin-top: 40px;  
 } 
+
+/* comments scrollbar */
+.chat-comments {
+  max-height: 800px;
+  overflow: auto;
+  padding-right: 20px;
+  /* firefox scrollbar style */
+  scrollbar-width: 20px;
+  scrollbar-color: #fff #e4e4e4;
+}
+/* Chrome, Edge, and Safari scrollbar styles */
+.chat-comments::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-comments::-webkit-scrollbar-track {
+  background: #fff;
+}
+.chat-comments::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 3px solid #e4e4e4;
+}

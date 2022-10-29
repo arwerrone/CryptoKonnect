@@ -6,7 +6,7 @@ import { useAuthContext } from '../../../hooks/useSocialAuthContext';
 import PostList from '../../../components/social/PostList';
 import ProjectFilter from './PostFilter';
 
-import NavbarComp from '../../../components/NavbarComp';
+// import NavbarComp from '../../../components/NavbarComp';
 import Navbar from '../../../components/social/SocialNavbar';
 
 import Sidebar from '../../../components/social/SocialSidebar';

@@ -2,7 +2,8 @@ import { useState } from 'react';
 // import { useSignup } from '../../../hooks/useSocialSignup';
 import { useSignup } from '../../src/hooks/useSocialSignup';
 
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 
 // styles

@@ -124,7 +124,7 @@ export default function Create() {
               <Select onChange={option => setAssignedUsers(option)} options={users} isMulti />
             </label>
             <br />
-            <button className="btn bg-primary">Add Post</button>
+            <button className="btn bg-primary text-white">Add Post</button>
 
             {formError && <p className="error">{formError}</p>}
           </form>
