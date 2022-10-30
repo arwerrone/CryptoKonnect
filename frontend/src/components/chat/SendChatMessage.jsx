@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth, db } from '../../firebase';
 // import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import firebase from 'firebase';
+import { useAuthContext } from '../../hooks/useSocialAuthContext';
 
 const style = {
   form: `h-14 w-full max-w-[728px]  flex text-xl relative bottom-0`,
@@ -10,6 +11,7 @@ const style = {
 };
 
 const SendChatMessage = ({ scroll }) => {
+  const { user } = useAuthContext();
   const [input, setInput] = useState('');
 
   const sendMessage = async e => {
@@ -25,8 +27,8 @@ const SendChatMessage = ({ scroll }) => {
     db.collection("messages").add(    
     {
       text: input,
-      // name: displayName,
-      name: firebase.auth().currentUser.email,
+      // name: firebase.auth().currentUser.email,
+      name: user.displayName,
       uid,
       // timestamp: serverTimestamp()
       timestamp: firebase.firestore.FieldValue.serverTimestamp()

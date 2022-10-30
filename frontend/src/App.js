@@ -16,8 +16,9 @@ import AccountPage from './routes/AccountPage'
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
-import { AccountContextProvider } from './context/Authentication';
+import PremiumPage from './components/premium/PremiumPage';
 
+import { AccountContextProvider } from './context/Authentication';
 import { Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useSocialAuthContext';
 
@@ -59,6 +60,7 @@ function App() {
           <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/account" element={user ? <AccountPage /> : <Navigate to="/signin" />} />
+          <Route path="/getpremium" element={user ? <PremiumPage /> : <Navigate to="/signin" />} />
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/compare" element={<CompareComp />} />

@@ -1,12 +1,11 @@
-import { useState } from 'react';
-// import { useSignup } from '../../../hooks/useSocialSignup';
+import React, { useEffect, useState } from 'react';
 import { useUpdate } from '../hooks/useSocialAccount';
 
 // use update hook
 import firebase from 'firebase';
 import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
+import { projectFirestore } from '../firebase';
 
-// import { Link, useNavigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import SocialAvatar from '../components/social/SocialAvatar';
@@ -16,7 +15,19 @@ import '../../src/routes/social/socialSignup/SocialSignup.css';
 
 export default function Update() {
   const { user } = useAuthContext();
-  // console.log(user.photoURL);
+
+  // read premium from Firestore
+  const [premium, setPremium] = useState([]);
+
+  // reference: https://firebase.google.com/docs/firestore/query-data/get-data
+  useEffect(() => {
+    projectFirestore
+      .collection('users')
+      .doc(`${user?.uid}`)
+      .onSnapshot(doc => {
+        setPremium(doc.data()?.premium);
+      });
+  }, [user?.uid]);
 
   // const [email, setEmail] = useState('');
   const [email, setEmail] = useState(firebase.auth().currentUser.email);
@@ -25,7 +36,6 @@ export default function Update() {
 
   // const [displayName, setDisplayName] = useState('');
   const [displayName, setDisplayName] = useState(user.displayName);
-
   const [thumbnail, setThumbnail] = useState(null);
 
   const [thumbnailError, setThumbnailError] = useState(null);
@@ -64,11 +74,22 @@ export default function Update() {
   return (
     <>
       <div className="round-corner mt-0 py-4">
-        <div className="mx-auto mb-2 max-w-[70px] py-18">
+        <div className="mx-auto my-2 max-w-[70px] py-18">
           <SocialAvatar src={user.photoURL} />
         </div>
-        <h2 className="text-center text-4xl mb-3">{user.displayName}'s Profile</h2>
-        <div className="mx-auto max-w-[450px] px-5 py-18">
+        <h2 className="text-center text-3xl mb-3">{user.displayName}'s Profile</h2>
+
+        {premium === false ? (
+          <div className="rounded-2xl bg-secondary mx-auto w-60 pt-2">
+            <p className="shadow-xl text-center text-white text-xl pb-2 px-1">Free Account</p>
+          </div>
+        ) : (
+          <div className="rounded-2xl bg-danger mx-auto w-60 pt-2">
+            <p className="shadow-xl text-center text-white text-xl pb-2 px-1">Premium Account</p>
+          </div>
+        )}
+
+        <div className="mx-auto max-w-[450px] px-5 py-18 mt-7">
           <form onSubmit={handleSubmit} className="round-corner my-0">
             <div className="my-0">
               <label>Email</label>
@@ -109,10 +130,10 @@ export default function Update() {
               </div>
             </div>
 
-            {!isPending && <button className="mt-5 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl">Update Profile</button>}
+            {!isPending && <button className="mt-5 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-2xl">Update Profile</button>}
 
             {isPending && (
-              <button className="mt-5 mb-3 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" disabled>
+              <button className="mt-5 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" disabled>
                 loading
               </button>
             )}
