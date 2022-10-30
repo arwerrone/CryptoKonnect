@@ -12,6 +12,7 @@ import Web3 from 'web3';
 import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
+import AccountPage from './routes/AccountPage'
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
@@ -57,6 +58,8 @@ function App() {
           <Route path="/" element={<HomePage cryptos={cryptos} />} />
           <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/account" element={user ? <AccountPage /> : <Navigate to="/signin" />} />
+
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/compare" element={<CompareComp />} />
           <Route path="/crypto/:cryptoId" element={<CryptoDetailPage />}>
@@ -69,7 +72,6 @@ function App() {
           <Route path="/create" element={user ? <Create /> : <Navigate to="/socialsignin" />} />
           <Route path="/posts/:id" element={user ? <Post /> : <Navigate to="/socialsignin" />} />
           <Route path="/chat" element={<SocialChat />} />
-
 
           <Route path="/socialsignin" element={user ? <Navigate to="/social" /> : <SocialLogin />} />
           <Route path="/socialsignup" element={user ? <Navigate to="/social" /> : <SocialSignup />} />
