@@ -9,6 +9,7 @@ import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
 // import { Link, useNavigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
+import SocialAvatar from '../components/social/SocialAvatar';
 
 // styles
 import '../../src/routes/social/socialSignup/SocialSignup.css';
@@ -16,7 +17,7 @@ import '../../src/routes/social/socialSignup/SocialSignup.css';
 export default function Update() {
   const { user } = useAuthContext();
   // console.log(user.photoURL);
-  
+
   // const [email, setEmail] = useState('');
   const [email, setEmail] = useState(firebase.auth().currentUser.email);
 
@@ -63,9 +64,11 @@ export default function Update() {
   return (
     <>
       <div className="round-corner mt-0 py-4">
-          <h2 className="text-center text-4xl mb-3">{user.displayName}'s Profile</h2>
+        <div className="mx-auto mb-2 max-w-[70px] py-18">
+          <SocialAvatar src={user.photoURL} />
+        </div>
+        <h2 className="text-center text-4xl mb-3">{user.displayName}'s Profile</h2>
         <div className="mx-auto max-w-[450px] px-5 py-18">
-
           <form onSubmit={handleSubmit} className="round-corner my-0">
             <div className="my-0">
               <label>Email</label>

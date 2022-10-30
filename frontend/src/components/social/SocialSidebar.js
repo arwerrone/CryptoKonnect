@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useSocialAuthContext';
 
 // components
-import Avatar from '../social/SocialAvatar';
+import SocialAvatar from '../social/SocialAvatar';
 
 // styles & images
 import './SocialSidebar.css';
@@ -16,7 +16,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="user">
-          <Avatar src={user.photoURL} />
+          <SocialAvatar src={user.photoURL} />
           <p>Hey {user.displayName}</p>
         </div>
         <nav className="links">
