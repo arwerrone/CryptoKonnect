@@ -35,7 +35,7 @@ const Dashboard = () => {
               <div className="px-2">
                 <SocialAvatar src={user.photoURL} />
               </div>
-              {premium === false ? <p className="rounded-xl bg-secondary text-white text-center text-lg pb-1 px-1">Free</p> : <p className="rounded-xl bg-danger text-white text-center text-lg pb-1 px-2">Premium</p>}
+              {premium === false ? <p className="rounded-xl bg-secondary text-white text-center text-lg pb-1 px-1">Free</p> : <p className="rounded-xl bg-danger text-white text-center text-lg pb-1 px-1">Premium</p>}
             </div>
             <div className="px-3">
               <h2 className="text-4xl py-3">Dashboard</h2>
