@@ -1,40 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
-import { AccountAuth } from '../context/Authentication';
+// import { AccountAuth } from '../context/Authentication';
+import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
+import { projectFirestore } from '../firebase';
+import SocialAvatar from '../components/social/SocialAvatar';
+
 import { Navigate } from 'react-router-dom';
-// import ChatDashboard from '../components/dashboard/ChatDashboard';
 import { Link } from 'react-router-dom';
 
 import { useLogout } from '../../src/hooks/useSocialLogout';
-// import { Navigate, useNavigate } from 'react-router-dom';
-// import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
 
 const Dashboard = () => {
   // const { user, logOff } = AccountAuth();
-  const { user } = AccountAuth();
   // const navigate = useNavigate();
-  /*
-  const handlelogOff = async () => {
-    try {
-      await logOff();
-      navigate('/');
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-*/
+  const { user } = useAuthContext();
+  const [premium, setPremium] = useState([]);
   const { logout, isPending } = useLogout();
+
+  useEffect(() => {
+    projectFirestore
+      .collection('users')
+      .doc(`${user?.uid}`)
+      .onSnapshot(doc => {
+        setPremium(doc.data()?.premium);
+      });
+  }, [user?.uid]);
 
   if (user) {
     return (
       <div className="mx-auto max-w-[1150px]">
         <div className="round-corner flex flex-auto justify-between items-center mt-4 py-0">
-          <div>
-            <h2 className="text-4xl py-3">Dashboard</h2>
+          <div className="flex flex-auto mt-4 py-0 px-2">
             <div>
-              <p>Welcome, {user?.email}</p>
+              <div className="px-2">
+                <SocialAvatar src={user.photoURL} />
+              </div>
+              {premium === false ? <p className="rounded-xl bg-secondary text-white text-center text-lg pb-1 px-1">Free</p> : <p className="rounded-xl bg-danger text-white text-center text-lg pb-1 px-2">Premium</p>}
+            </div>
+            <div className="px-3">
+              <h2 className="text-4xl py-3">Dashboard</h2>
+              <div>
+                <p>
+                  Welcome, <strong>{user?.displayName}</strong>
+                </p>
+              </div>
             </div>
           </div>
+
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
               <li className="px-2">
@@ -66,7 +78,7 @@ const Dashboard = () => {
             <AddedCrypto />
           </div>
         </div>
-      
+
         {/* 
         <div className="round-corner flex flex-auto justify-between items-center my-10 py-10">
           <div className="w-full">
@@ -76,7 +88,6 @@ const Dashboard = () => {
         </div> 
         */}
       </div>
-      
     );
   } else {
     return <Navigate to="/signin" />;
