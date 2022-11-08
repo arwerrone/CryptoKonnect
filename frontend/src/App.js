@@ -37,7 +37,7 @@ function getLibrary(provider) {
 
 function App() {
   const [cryptos, setCryptos] = useState([]);
-  let urlStr = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=50&page=1&sparkline=true';
+  let urlStr = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true';
 
   useEffect(() => {
     axios

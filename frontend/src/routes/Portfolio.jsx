@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import AddedCrypto from '../components/dashboard/AddedCrypto';
-// import { AccountAuth } from '../context/Authentication';
 
 import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
 import { projectFirestore } from '../firebase';
 import SocialAvatar from '../components/social/SocialAvatar';
-import PortfolioCryptoDetail from '../components/Portfolio/PortfolioCryptoDetail';
+import PortfolioCryptoDetail from '../components/portfolio/PortfolioCryptoDetail';
 
 import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
 import { useLogout } from '../../src/hooks/useSocialLogout';
 
+import PortfolioAddedCrypto from '../components/portfolio/PortfolioAddedCrypto';
+
 const Dashboard = () => {
-  // const { user, logOff } = AccountAuth();
-  // const navigate = useNavigate();
   let sum = 0;
-  const [cryptos, setCryptos] = useState([]);
+  const [amounts, setAmounts] = useState([]);
 
   const { user } = useAuthContext();
   const [premium, setPremium] = useState([]);
@@ -36,13 +32,18 @@ const Dashboard = () => {
       .collection('users')
       .doc(`${user?.uid}`)
       .onSnapshot(doc => {
-        setCryptos(doc.data()?.alertList);
+        setAmounts(doc.data()?.portfolioList);
       });
   }, [user?.uid]);
 
-  if (cryptos) { cryptos.forEach(c => sum += c.amount * c.price); }
+  if (amounts) {
+    amounts.forEach(a => (sum += a.amount * a.price));
+    // for (let i = 0; i < cryptos.length; i++) {
+    //   sum += amounts[i].amount * cryptos[i].price;
+    // }
+  }
 
-  if (user && cryptos) {
+  if (user) {
     return (
       <div className="mx-auto max-w-[1150px]">
         <div className="round-corner flex flex-auto justify-between items-center mt-4 py-0">
@@ -82,13 +83,18 @@ const Dashboard = () => {
           </div>
         </div>
 
+        <div className="mt-8">
+          <PortfolioAddedCrypto />
+        </div>
+
         <div className="flex flex-auto justify-between items-center my-10 py-10">
           <div className="w-full">
-            <h2 className="text-4xl py-3">{user.displayName}'s Total Net Worth: <span className='text-danger'>${sum.toLocaleString()}</span></h2>
+            <h2 className="text-4xl py-3">
+              {user.displayName}'s Total Net Worth: <span className="text-danger">${sum.toLocaleString()}</span>
+            </h2>
             <h2 className="text-4xl py-3">Your Assets</h2>
             {/* <PortfolioCryptoDetail crypto="bitcoin" /> */}
-
-            {cryptos?.map(crypto => (
+            {amounts?.map(crypto => (
               <PortfolioCryptoDetail key={crypto.id} crypto={crypto} />
             ))}
           </div>

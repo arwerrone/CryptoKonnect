@@ -9,6 +9,7 @@ import firebase from 'firebase/app';
 
 const SingleCrypto = props => {
   const [addedCrypto, setAddedCrypto] = useState(false);
+  const [addedAmount, setAddedAmount] = useState(false);
   const { user } = AccountAuth();
 
   // const cryptoPath = db.collection('users').doc(`${user?.email}`);
@@ -20,6 +21,26 @@ const SingleCrypto = props => {
       setAddedCrypto(true);
       await cryptoPath.update({
         alertList: firebase.firestore.FieldValue.arrayUnion({
+          // amount: 1,
+          id: props.crypto.id,
+          name: props.crypto.name,
+          image: props.crypto.image,
+          price: props.crypto.current_price,
+          rank: props.crypto.market_cap_rank,
+          symbol: props.crypto.symbol
+        })
+      });
+    } else {
+      alert('Please log in to add cryptos to your alert list');
+    }
+  };
+
+  const addAmount = async () => {
+
+    if (user?.uid) {
+      setAddedAmount(true);
+      await cryptoPath.update({
+        portfolioList: firebase.firestore.FieldValue.arrayUnion({
           amount: 1,
           id: props.crypto.id,
           name: props.crypto.name,
@@ -34,10 +55,13 @@ const SingleCrypto = props => {
     }
   };
 
+
+
+
   return (
     <tr className="border-t h-[75px]">
       <td onClick={addCrypto}>{addedCrypto ? <AiFillStar /> : <AiOutlineStar />}</td>
-
+      <td onClick={addAmount}>{addedAmount ? <AiFillStar /> : <AiOutlineStar />}</td>
       <td>{props.crypto.market_cap_rank}</td>
       <td>
         <Link to={`/crypto/${props.crypto.id}`}>

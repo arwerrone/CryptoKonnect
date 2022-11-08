@@ -14,7 +14,6 @@ const PortfolioCryptoDetail = props => {
 
   useEffect(() => {
     db.collection('users')
-      // .doc(`${user?.email}`)
       .doc(`${user?.uid}`)
       .onSnapshot(doc => {
         setCryptos(doc.data()?.alertList);
@@ -22,7 +21,6 @@ const PortfolioCryptoDetail = props => {
   }, [user?.uid]);
 
   // const params = useParams();
-
   // let urlStr = `https://api.coingecko.com/api/v3/coins/${params.cryptoId}?localization=false&sparkline=true`;
   // let urlStr = `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&sparkline=true`;
   let urlStr = `https://api.coingecko.com/api/v3/coins/${props.crypto.id}?localization=false&sparkline=true`;
@@ -30,7 +28,7 @@ const PortfolioCryptoDetail = props => {
   useEffect(() => {
     axios.get(urlStr).then(res => {
       setCrypto(res.data);
-      // console.log(res.data);
+      console.log(res.data);
     });
   }, [urlStr]);
 

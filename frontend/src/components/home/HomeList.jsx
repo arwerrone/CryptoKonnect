@@ -18,11 +18,14 @@ const HomeList = props => {
       <table className="w-100 text-left">
         <thead>
           <tr className="border-b border-t">
-            <th>Tracking</th>
+            <th>Track</th>
+            <th>Add</th>
+
+
             <th className="px-1">Ranking</th>
             <th className="text-center">Cryptocurrency</th>
             <th>Abbr.</th>
-            <th>Price(CAD)</th>
+            <th>Price(USD)</th>
             <th>24h</th>
             <th>24h Volume</th>
             <th>Market</th>
