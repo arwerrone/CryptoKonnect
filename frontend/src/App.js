@@ -13,6 +13,7 @@ import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
 import AccountPage from './routes/AccountPage'
+import Portfolio from './routes/Portfolio'
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
@@ -60,6 +61,8 @@ function App() {
           <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/account" element={user ? <AccountPage /> : <Navigate to="/signin" />} />
+          <Route path="/portfolio" element={user ? <Portfolio /> : <Navigate to="/signin" />} />
+
           <Route path="/getpremium" element={user ? <PremiumPage /> : <Navigate to="/signin" />} />
 
           <Route path="/dashboard" element={<Dashboard />} />
