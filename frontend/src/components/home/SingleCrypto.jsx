@@ -36,7 +36,6 @@ const SingleCrypto = props => {
   };
 
   const addAmount = async () => {
-
     if (user?.uid) {
       setAddedAmount(true);
       await cryptoPath.update({
@@ -55,13 +54,10 @@ const SingleCrypto = props => {
     }
   };
 
-
-
-
   return (
     <tr className="border-t h-[75px]">
       <td onClick={addCrypto}>{addedCrypto ? <AiFillStar /> : <AiOutlineStar />}</td>
-      <td onClick={addAmount}>{addedAmount ? <AiFillStar /> : <AiOutlineStar />}</td>
+
       <td>{props.crypto.market_cap_rank}</td>
       <td>
         <Link to={`/crypto/${props.crypto.id}`}>
@@ -72,6 +68,8 @@ const SingleCrypto = props => {
           </div>
         </Link>
       </td>
+      <td onClick={addAmount}>{addedAmount ? <AiFillStar /> : <AiOutlineStar />}</td>
+
       <td>{props.crypto.symbol.toUpperCase()}</td>
       <td>
         $

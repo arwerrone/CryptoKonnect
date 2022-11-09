@@ -19,11 +19,11 @@ const HomeList = props => {
         <thead>
           <tr className="border-b border-t">
             <th>Track</th>
-            <th>Add</th>
 
 
             <th className="px-1">Ranking</th>
             <th className="text-center">Cryptocurrency</th>
+            <th>Add</th>
             <th>Abbr.</th>
             <th>Price(USD)</th>
             <th>24h</th>
