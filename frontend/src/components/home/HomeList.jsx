@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import SingleCrypto from './SingleCrypto';
-
+import { AiOutlineStar } from 'react-icons/ai';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 const HomeList = props => {
   const [keyword, setKeyword] = useState('');
 
@@ -13,8 +14,20 @@ const HomeList = props => {
           <input className="bg-gray border border-input px-3 py-1 rounded-xl shadow-xl" onChange={event => setKeyword(event.target.value)} type="text" placeholder="Find a Crypto" />
         </form>
       </div>
-      <p className="text-base">Please click on the <strong>Star icon</strong> to add crypto(s) to your personal Dashboard.</p>
-      <p className="pb-4 text-base">Or click on the <strong>Add icon</strong> to add crypto(s) to your personal Portfolio.</p>
+      <p className="text-base">
+        Please click on the <strong>Star</strong>{' '}
+        <span className="inline-block">
+          <AiOutlineStar />
+        </span>{' '}
+        icon to add crypto(s) to your personal <strong>Dashboard</strong>.
+      </p>
+      <p className="pb-4 text-base">
+        Or click on the <strong>Add</strong>{' '}
+        <span className="inline-block">
+          <IoIosAddCircleOutline />
+        </span>{' '}
+        icon to add crypto(s) to your personal <strong>Portfolio</strong>.
+      </p>
       <table className="w-100 text-left">
         <thead>
           <tr className="border-b border-t">
