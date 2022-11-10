@@ -42,14 +42,28 @@ const PortfolioCryptoDetail = props => {
               <p className="text-3xl font-bold">{crypto?.name} price</p>
               <p>({crypto.symbol?.toUpperCase()} / USD)</p>
             </div>
-            <p className="my-auto text-green-600 text-3xl font-bold">Amount: {props.crypto.amount}</p>
+
+            <div className="flex">
+              <div className="mr-4">
+                <p className="my-auto text-xl text-right">Amount:</p>
+                <p className="my-auto text-xl text-right">Value: $</p>
+                <p className="my-auto text-right">Value change (24h): $</p>
+              </div>
+
+              <div>
+                <p className="my-auto text-xl font-bold text-left">{props.crypto.amount}</p>
+                <p className="my-auto text-xl font-bold text-left">{(props.crypto.amount * props.crypto.price).toLocaleString()}</p>
+                {props.crypto.change > 0 ? <p className="my-auto text-green-600 text-left">{(0.01 *props.crypto.change * props.crypto.price * props.crypto.amount).toLocaleString()}</p> : <p className="my-auto text-danger text-left">{(0.01 * props.crypto.change * props.crypto.price * props.crypto.amount).toLocaleString()}</p>}
+              </div>
+            </div>
           </div>
         </div>
         <hr />
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <div className="flex justify-between">
-              {crypto.market_data?.current_price ? <p className="text-3xl font-bold">${crypto.market_data.current_price.usd.toLocaleString()}</p> : null}
+              {/* {crypto.market_data?.current_price ? <p className="text-3xl font-bold">${crypto.market_data.current_price.usd.toLocaleString()}</p> : null} */}
+              {props.crypto.price ? <p className="text-3xl font-bold">${props.crypto.price.toLocaleString()}</p> : null}
               <p className="text-xl font-bold mb-4">7 Day</p>
             </div>
             <div>
