@@ -12,6 +12,8 @@ import PortfolioAddedCrypto from '../components/portfolio/PortfolioAddedCrypto';
 
 const Dashboard = () => {
   let sum = 0;
+  let sumChange = 0;
+  let change = 0;
   const [amounts, setAmounts] = useState([]);
 
   const { user } = useAuthContext();
@@ -41,6 +43,16 @@ const Dashboard = () => {
     // for (let i = 0; i < cryptos.length; i++) {
     //   sum += amounts[i].amount * cryptos[i].price;
     // }
+  }
+
+  if (amounts) {
+    sumChange = 0;
+    for (let i = 0; i < amounts.length; i++) {
+      sumChange += (amounts[i].change * amounts[i].amount * amounts[i].price) / 100;
+    }
+    if (sum !== 0) {
+      change = (sumChange / sum) * 100;
+    }
   }
 
   if (user) {
@@ -90,15 +102,22 @@ const Dashboard = () => {
         <div className="flex flex-auto justify-between items-center my-0 py-0">
           <div className="w-full">
             <div className="flex justify-between">
-              <h4 className="text-danger">{user.displayName}'s Net Worth:</h4>
-              <h4 className="pr-4 text-danger">${sum.toLocaleString()}</h4>
+              <h4>{user.displayName}'s Net Worth:</h4>
+              <h4 className="pr-4 text-green-600">${sum.toLocaleString()}</h4>
+            </div>
+            <div className="mt-2 flex justify-between">
+              <p>Net Worth Change (last 24h):</p>
+              {sumChange < 0 ? <p className="pr-4 text-danger">${sumChange.toLocaleString()}</p> : <p className="pr-4 text-green-600">${sumChange.toLocaleString()}</p>}
+            </div>
+            <div className="flex justify-between">
+              <p>Change Percentage (last 24h):</p>
+              {change < 0 ? <p className="pr-4 text-danger">{change.toFixed(4)}%</p> : <p className="pr-4 text-green-600">{change.toFixed(4)}%</p>}
             </div>
             <hr />
             <h4 className="py-3">Your Assets</h4>
             {amounts?.map(crypto => (
               <PortfolioCryptoDetail key={crypto.id} crypto={crypto} />
             ))}
-            {/* <PortfolioCryptoDetail crypto="bitcoin" /> */}
           </div>
         </div>
       </div>

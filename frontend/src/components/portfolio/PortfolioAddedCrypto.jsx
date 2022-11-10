@@ -70,6 +70,7 @@ const PortfolioAddedCrypto = () => {
               <th className="text-left">Remove</th>
               <th className="text-left">Ranking</th>
               <th className="text-left">Crypto</th>
+              <th className="text-left">Price Change 24h</th>
               <th className="text-left">Price</th>
               <th className="text-left">Amount</th>
               <th className="text-left">Total Value</th>
@@ -78,7 +79,7 @@ const PortfolioAddedCrypto = () => {
           <tbody>
             {amounts?.map(crypto => (
               <tr key={crypto.id} className="text-left overflow-hidden h-[75px]">
-                <td className="pl-10">
+                <td>
                   <AiOutlineClose onClick={() => deleteCrypto(crypto.id)} className="cursor-pointer" />
                 </td>
                 <td>{crypto?.rank}</td>
@@ -93,6 +94,8 @@ const PortfolioAddedCrypto = () => {
                     </div>
                   </Link>
                 </td>
+
+                <td>{crypto?.change < 0 ? <p className="my-4 text-red-500">{crypto?.change.toFixed(4)}%</p> : <p className="my-4 text-green-600">{crypto?.change.toFixed(4)}%</p>}</td>
 
                 <td>${crypto?.price.toLocaleString()}</td>
                 <td>
@@ -114,7 +117,9 @@ const PortfolioAddedCrypto = () => {
                   </form>
                   {/* <IoIosAddCircleOutline onClick={() => addCrypto(crypto?.id, 1)} className="text-xl cursor-pointer" /> */}
                 </td>
-                <td className="text-danger">${(crypto?.amount * crypto?.price).toLocaleString()}</td>
+                <td>
+                  <strong>${(crypto?.amount * crypto?.price).toLocaleString()}</strong>
+                </td>
               </tr>
             ))}
           </tbody>

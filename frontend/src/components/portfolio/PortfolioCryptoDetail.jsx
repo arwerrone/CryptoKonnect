@@ -42,7 +42,7 @@ const PortfolioCryptoDetail = props => {
               <p className="text-3xl font-bold">{crypto?.name} price</p>
               <p>({crypto.symbol?.toUpperCase()} / USD)</p>
             </div>
-            <p className="my-auto text-3xl font-bold">Amount: {props.crypto.amount}</p>
+            <p className="my-auto text-green-600 text-3xl font-bold">Amount: {props.crypto.amount}</p>
           </div>
         </div>
         <hr />
