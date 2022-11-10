@@ -51,8 +51,8 @@ const PortfolioCryptoDetail = props => {
               </div>
 
               <div>
-                <p className="my-auto text-xl font-bold text-left">{props.crypto.amount}</p>
-                <p className="my-auto text-xl font-bold text-left">{(props.crypto.amount * props.crypto.price).toLocaleString()}</p>
+                <p className="my-auto text-primary text-xl font-bold text-left">{props.crypto.amount}</p>
+                <p className="my-auto text-primary text-xl font-bold text-left">{(props.crypto.amount * props.crypto.price).toLocaleString()}</p>
                 {props.crypto.change > 0 ? <p className="my-auto text-green-600 text-left">{(0.01 *props.crypto.change * props.crypto.price * props.crypto.amount).toLocaleString()}</p> : <p className="my-auto text-danger text-left">{(0.01 * props.crypto.change * props.crypto.price * props.crypto.amount).toLocaleString()}</p>}
               </div>
             </div>
