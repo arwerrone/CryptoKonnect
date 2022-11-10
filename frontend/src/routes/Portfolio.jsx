@@ -86,17 +86,19 @@ const Dashboard = () => {
         <div className="mt-8">
           <PortfolioAddedCrypto />
         </div>
-
-        <div className="flex flex-auto justify-between items-center my-10 py-10">
+        <hr />
+        <div className="flex flex-auto justify-between items-center my-0 py-0">
           <div className="w-full">
-            <h2 className="text-4xl py-3">
-              {user.displayName}'s Total Net Worth: <span className="text-danger">${sum.toLocaleString()}</span>
-            </h2>
-            <h2 className="text-4xl py-3">Your Assets</h2>
-            {/* <PortfolioCryptoDetail crypto="bitcoin" /> */}
+            <div className="flex justify-between">
+              <h4 className="text-danger">{user.displayName}'s Net Worth:</h4>
+              <h4 className="pr-4 text-danger">${sum.toLocaleString()}</h4>
+            </div>
+            <hr />
+            <h4 className="py-3">Your Assets</h4>
             {amounts?.map(crypto => (
               <PortfolioCryptoDetail key={crypto.id} crypto={crypto} />
             ))}
+            {/* <PortfolioCryptoDetail crypto="bitcoin" /> */}
           </div>
         </div>
       </div>

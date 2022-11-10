@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { IoIosAddCircleOutline, IoIosAddCircle } from "react-icons/io";
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 import { AccountAuth } from '../../context/Authentication';
 import { db } from '../../firebase';
 import firebase from 'firebase/app';
+import { Link } from 'react-router-dom';
 
 const SingleCrypto = props => {
   const [addedCrypto, setAddedCrypto] = useState(false);
@@ -57,7 +58,7 @@ const SingleCrypto = props => {
   return (
     <tr className="border-t h-[75px]">
       <td onClick={addCrypto}>{addedCrypto ? <AiFillStar /> : <AiOutlineStar />}</td>
-
+      <td onClick={addAmount}>{addedAmount ? <IoIosAddCircle /> : <IoIosAddCircleOutline />}</td>
       <td>{props.crypto.market_cap_rank}</td>
       <td>
         <Link to={`/crypto/${props.crypto.id}`}>
@@ -68,7 +69,7 @@ const SingleCrypto = props => {
           </div>
         </Link>
       </td>
-      <td onClick={addAmount}>{addedAmount ? <AiFillStar /> : <AiOutlineStar />}</td>
+      
 
       <td>{props.crypto.symbol.toUpperCase()}</td>
       <td>
@@ -99,6 +100,7 @@ const SingleCrypto = props => {
           <SparklinesLine color="blue" />
         </Sparklines>
       </td>
+      
     </tr>
   );
 };
