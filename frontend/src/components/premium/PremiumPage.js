@@ -1,16 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { Accordion, Card, Button, Container } from 'react-bootstrap';
 import { Accordion, Card, Container } from 'react-bootstrap';
 
 // import user update hook
 import { useUpdate } from '../../hooks/usePremium';
 
+//Stripe
+import { loadStripe } from "@stripe/stripe-js";
+//const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+let stripePromise;
+
+const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+  }
+  return stripePromise;
+};
+
+const Monthly = 'price_1M2OfjHhFmbBpGACL9hZ25vu';
+const Annually = 'price_1M2OgeHhFmbBpGACgo5aN4Ow';
+
 const PremiumPage = () => {
   const { update, isPending, error } = useUpdate();
-
+  
   const setPremium = async () => {
     await update();
   };
+
+  const [stripeError, setStripeError] = useState(null);
+
+  const item1 = {
+    price: "price_1M2OfjHhFmbBpGACL9hZ25vu",
+    quantity: 1
+  };
+  const item2 = {
+    price: "price_1M2OgeHhFmbBpGACgo5aN4Ow",
+    quantity: 1
+  };
+
+  const checkoutOptions1 = {
+    lineItems: [item1],
+    mode: "payment",
+    successUrl: `${window.location.origin}/getpremium/success`,
+    cancelUrl: `${window.location.origin}/getpremium/cancel`
+  };
+  const checkoutOptions2 = {
+    lineItems: [item2],
+    mode: "payment",
+    successUrl: `${window.location.origin}/getpremium/success`,
+    cancelUrl: `${window.location.origin}/getpremium/cancel`
+  };
+
+  const redirectToCheckout = async (subType) => {
+    console.log("redirectToCheckout");
+
+    const stripe = await getStripe();
+
+    if(Monthly === subType){
+      const { error } = await stripe.redirectToCheckout(checkoutOptions1);
+      console.log("Stripe checkout error", error);
+      if (error) setStripeError(error.message);
+    }if(Annually === subType){
+      const { error } = await stripe.redirectToCheckout(checkoutOptions2);
+      console.log("Stripe checkout error", error);
+      if (error) setStripeError(error.message);
+    }
+
+  };
+
+  if (stripeError) alert(stripeError);
 
   return (
     <>
@@ -40,10 +98,11 @@ const PremiumPage = () => {
           <Card style={{ width: '18rem' }} className="text-center">
             <Card.Header as="h5">Monthly</Card.Header>
             <Card.Body>
-              <Card.Title>$/Month</Card.Title>
+              <Card.Title>$25 /Month</Card.Title>
+              <Card.Text>Total: 25$</Card.Text>
               <Card.Text>Billed Monthly</Card.Text>
               {!isPending && (
-                <button className="mt-4 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" onClick={setPremium}>
+                <button className="mt-4 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-2xl" onClick={event => {redirectToCheckout(Monthly); setPremium()}}>
                   Get Premium
                 </button>
               )}
@@ -59,11 +118,12 @@ const PremiumPage = () => {
           <Card style={{ width: '18rem' }} className="text-center">
             <Card.Header as="h5">Annual</Card.Header>
             <Card.Body>
-              <Card.Title>$/Month</Card.Title>
+              <Card.Title>$17 /Month</Card.Title>
+              <Card.Text>Total: 204$</Card.Text>
               <Card.Text>Billed Annually</Card.Text>
 
               {!isPending && (
-                <button className="mt-4 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-xl" onClick={setPremium}>
+                <button className="mt-4 mb-4 p-2 w-full bg-primary text-white rounded-xl shadow-xl" onClick={event => {redirectToCheckout(Annually); setPremium()}}>
                   Get Premium
                 </button>
               )}

@@ -17,7 +17,12 @@ import Portfolio from './routes/Portfolio'
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
+
+//Premium
 import PremiumPage from './components/premium/PremiumPage';
+import "@stripe/stripe-js";
+import CancelPage from './components/premium/CancelPage'
+import SuccessPage from './components/premium/SuccessPage'
 
 import { AccountContextProvider } from './context/Authentication';
 import { Navigate } from 'react-router-dom';
@@ -64,6 +69,8 @@ function App() {
           <Route path="/portfolio" element={user ? <Portfolio /> : <Navigate to="/signin" />} />
 
           <Route path="/getpremium" element={user ? <PremiumPage /> : <Navigate to="/signin" />} />
+          <Route path="/getpremium/cancel" element={<CancelPage />} />
+          <Route path="/getpremium/success" element={<SuccessPage />} />
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/compare" element={<CompareComp />} />
