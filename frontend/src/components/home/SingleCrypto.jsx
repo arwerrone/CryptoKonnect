@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { IoIosAddCircleOutline, IoIosAddCircle } from 'react-icons/io';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 import { AccountAuth } from '../../context/Authentication';
 import { db } from '../../firebase';
 import firebase from 'firebase/app';
+import { Link } from 'react-router-dom';
 
 const SingleCrypto = props => {
   const [addedCrypto, setAddedCrypto] = useState(false);
@@ -45,19 +46,20 @@ const SingleCrypto = props => {
           name: props.crypto.name,
           image: props.crypto.image,
           price: props.crypto.current_price,
+          change: props.crypto.price_change_percentage_24h,
           rank: props.crypto.market_cap_rank,
           symbol: props.crypto.symbol
         })
       });
     } else {
-      alert('Please log in to add cryptos to your alert list');
+      alert('Please log in to add cryptos to your portfolio');
     }
   };
 
   return (
     <tr className="border-t h-[75px]">
-      <td onClick={addCrypto}>{addedCrypto ? <AiFillStar /> : <AiOutlineStar />}</td>
-
+      <td className="text-xl" onClick={addCrypto}>{addedCrypto ? <AiFillStar /> : <AiOutlineStar />}</td>
+      <td className="text-xl" onClick={addAmount}>{addedAmount ? <IoIosAddCircle /> : <IoIosAddCircleOutline />}</td>
       <td>{props.crypto.market_cap_rank}</td>
       <td>
         <Link to={`/crypto/${props.crypto.id}`}>
@@ -68,7 +70,6 @@ const SingleCrypto = props => {
           </div>
         </Link>
       </td>
-      <td onClick={addAmount}>{addedAmount ? <AiFillStar /> : <AiOutlineStar />}</td>
 
       <td>{props.crypto.symbol.toUpperCase()}</td>
       <td>
