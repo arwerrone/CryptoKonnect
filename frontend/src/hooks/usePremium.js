@@ -30,9 +30,31 @@ export const useUpdate = () => {
     }
   };
 
+  const cancelPremiumHook = async () => {
+    setError(null);
+    setIsPending(true);
+
+    try {
+      await projectFirestore.collection('users').doc(user?.uid).update({
+        premium: false
+      });
+
+      if (!isCancelled) {
+        setIsPending(false);
+        setError(null);
+      }
+    } catch (err) {
+      if (!isCancelled) {
+        setError(err.message);
+        setIsPending(false);
+      }
+    }
+
+  }
+
   useEffect(() => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { update, error, isPending };
+  return { update, error, isPending, cancelPremiumHook };
 };
