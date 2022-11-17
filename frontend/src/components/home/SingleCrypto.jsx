@@ -22,7 +22,8 @@ const SingleCrypto = props => {
       setAddedCrypto(true);
       await cryptoPath.update({
         alertList: firebase.firestore.FieldValue.arrayUnion({
-          // amount: 1,
+          min: 0,
+          max: 999999,          
           id: props.crypto.id,
           name: props.crypto.name,
           image: props.crypto.image,

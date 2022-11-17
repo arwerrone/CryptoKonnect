@@ -98,6 +98,7 @@ const Dashboard = () => {
         <div className="mt-8">
           <PortfolioAddedCrypto />
         </div>
+        
         <hr />
         <div className="flex flex-auto justify-between items-center my-0 py-0">
           <div className="w-full">

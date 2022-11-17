@@ -12,17 +12,17 @@ import Web3 from 'web3';
 import HomePage from './routes/HomePage';
 import SigninPage from './routes/SigninPage';
 import SignupPage from './routes/SignupPage';
-import AccountPage from './routes/AccountPage'
-import Portfolio from './routes/Portfolio'
+import AccountPage from './routes/AccountPage';
+import Portfolio from './routes/Portfolio';
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
 
 //Premium
 import PremiumPage from './components/premium/PremiumPage';
-import "@stripe/stripe-js";
-import CancelPage from './components/premium/CancelPage'
-import SuccessPage from './components/premium/SuccessPage'
+import '@stripe/stripe-js';
+import CancelPage from './components/premium/CancelPage';
+import SuccessPage from './components/premium/SuccessPage';
 
 import { AccountContextProvider } from './context/Authentication';
 import { Navigate } from 'react-router-dom';
@@ -45,14 +45,53 @@ function App() {
   let urlStr = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true';
 
   useEffect(() => {
-    axios
-      .get(urlStr)
-      .then(res => {
-        setCryptos(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const getAPIData = async () => {
+      axios
+        .get(urlStr)
+        .then(res => {
+          setCryptos(res.data);
+          console.log(res.data)
+          // Activate Notifications
+
+          if (res.data[0].current_price > 16000) {
+            new Notification('CryptoKonnect Notification', {
+              body: `Price Alert: ${res.data[0].id} has reached $${res.data[0].current_price.toLocaleString()}`,
+              // icon: "https://source.unsplash.com/random/?Cryptocurrency/"
+              icon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
+            });
+          }
+          
+          if (res.data[1].current_price < 1500) {
+            new Notification('CryptoKonnect Notification', {
+              body: `Price Alert: ${res.data[1].id} has dropped to $${res.data[1].current_price.toLocaleString()}`,
+              // icon: "https://source.unsplash.com/random/?Cryptocurrency/"
+              icon: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880'
+            });
+          }
+
+          if (res.data[4].current_price > 265) {
+            new Notification('CryptoKonnect Notification', {
+              body: `Price Alert: ${res.data[4].id} has reached $${res.data[4].current_price.toLocaleString()}`,
+              // icon: "https://source.unsplash.com/random/?Cryptocurrency/"
+              icon: 'https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1644979850'
+            });
+          }
+
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+
+    // API first call
+    getAPIData();
+
+    // run the API call every 60 * secs (1000ms)
+    const interval = setInterval(() => {
+      getAPIData();
+    //}, 60 * 1000);
+    }, 18000 * 1000);
+    return () => clearInterval(interval);
   }, [urlStr]);
 
   // const { authIsReady, user } = useAuthContext();
@@ -87,8 +126,6 @@ function App() {
 
           <Route path="/socialsignin" element={user ? <Navigate to="/social" /> : <SocialLogin />} />
           <Route path="/socialsignup" element={user ? <Navigate to="/social" /> : <SocialSignup />} />
-
-
         </Routes>
         <Footer />
       </AccountContextProvider>

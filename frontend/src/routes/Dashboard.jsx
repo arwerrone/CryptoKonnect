@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AddedCrypto from '../components/dashboard/AddedCrypto';
-// import { AccountAuth } from '../context/Authentication';
+
 import { useAuthContext } from '../../src/hooks/useSocialAuthContext';
 import { projectFirestore } from '../firebase';
 import SocialAvatar from '../components/social/SocialAvatar';
@@ -49,7 +49,7 @@ const Dashboard = () => {
 
           <div>
             <ul className="flex flex-auto justify-between items-center my-0 py-4">
-            <li className="px-2">
+              <li className="px-2">
                 <Link className="shadow-xl btn bg-primary text-white" to="/portfolio">
                   Portfolio
                 </Link>
@@ -83,15 +83,6 @@ const Dashboard = () => {
             <AddedCrypto />
           </div>
         </div>
-
-        {/* 
-        <div className="round-corner flex flex-auto justify-between items-center my-10 py-10">
-          <div className="w-full">
-            <h2 className="text-4xl py-3">Social</h2>
-            <ChatDashboard />
-          </div>
-        </div> 
-        */}
       </div>
     );
   } else {
