@@ -69,9 +69,9 @@ function App() {
             });
           }
 
-          if (res.data[4].current_price > 265) {
+          if (res.data[3].current_price > 265) {
             new Notification('CryptoKonnect Notification', {
-              body: `Price Alert: ${res.data[4].id} has reached $${res.data[4].current_price.toLocaleString()}`,
+              body: `Price Alert: ${res.data[3].id} has reached $${res.data[3].current_price.toLocaleString()}`,
               // icon: "https://source.unsplash.com/random/?Cryptocurrency/"
               icon: 'https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1644979850'
             });
