@@ -12,7 +12,7 @@ export default class NavbarComp extends Component {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link as={Link} to='/'><Button variant="outline-secondary">Home</Button></Nav.Link>
+                <Nav.Link as={Link} to='/home'><Button variant="outline-secondary">Home</Button></Nav.Link>
                 <Nav.Link as={Link} to='/wallet'><Button variant="outline-secondary">Wallet</Button></Nav.Link>
                 <Nav.Link as={Link} to='/dashboard'><Button variant="outline-secondary">Dashboard</Button></Nav.Link>
                 <Nav.Link as={Link} to='/compare'><Button variant="outline-secondary">Compare</Button></Nav.Link>

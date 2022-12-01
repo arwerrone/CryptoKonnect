@@ -17,6 +17,7 @@ import Portfolio from './routes/Portfolio';
 import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
+import SplashPage from './routes/SplashPage';
 
 //Premium
 import PremiumPage from './components/premium/PremiumPage';
@@ -101,7 +102,8 @@ function App() {
       <AccountContextProvider>
         <NavbarComp />
         <Routes>
-          <Route path="/" element={<HomePage cryptos={cryptos} />} />
+          <Route path="/" element={<SplashPage />} />
+          <Route path="/home" element={<HomePage cryptos={cryptos} />} />
           <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/account" element={user ? <AccountPage /> : <Navigate to="/signin" />} />
