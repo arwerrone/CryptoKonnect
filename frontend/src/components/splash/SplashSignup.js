@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './SplashSignup.css'
 
 import Crypto from '../../assets/trade.png'
@@ -19,7 +20,9 @@ const SplashSignup = () => {
                     {/* <div className='input-container'>
                         <input type='email' placeholder='Enter your email' />
                     </div> */}
-                        <button className='btn-danger rounded-lg py-2 w-[30%] bg-green-500'>Sign Up Now</button>
+                        <Link className="btn-danger rounded-lg py-2 px-4 bg-green-500 text-center no-underline" to="/signup">
+                        Sign Up Now
+          </Link>
                 </div>
 
             </div>
