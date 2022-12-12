@@ -27,7 +27,7 @@ export default class Footer extends Component {
             <ul className="col">
               <li>Crypto Konnect</li>
               <li>
-                <a href="/">About Us</a>
+                <a href="/about">About Us</a>
               </li>
               <li>
                 <a href="/">News</a>

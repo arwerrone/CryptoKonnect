@@ -18,6 +18,7 @@ import Dashboard from './routes/Dashboard';
 import CompareComp from './components/compare/CompareComp';
 import CryptoDetailPage from './routes/CryptoDetailPage';
 import SplashPage from './routes/SplashPage';
+import AboutPage from './routes/AboutPage';
 
 //Premium
 import PremiumPage from './components/premium/PremiumPage';
@@ -51,7 +52,7 @@ function App() {
         .get(urlStr)
         .then(res => {
           setCryptos(res.data);
-          console.log(res.data)
+          console.log(res.data);
           // Activate Notifications
 
           if (res.data[0].current_price > 16000) {
@@ -61,7 +62,7 @@ function App() {
               icon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'
             });
           }
-          
+
           if (res.data[1].current_price < 1500) {
             new Notification('CryptoKonnect Notification', {
               body: `Price Alert: ${res.data[1].id} has dropped to $${res.data[1].current_price.toLocaleString()}`,
@@ -77,7 +78,6 @@ function App() {
               icon: 'https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1644979850'
             });
           }
-
         })
         .catch(err => {
           console.log(err);
@@ -90,7 +90,7 @@ function App() {
     // run the API call every 60 * secs (1000ms)
     const interval = setInterval(() => {
       getAPIData();
-    //}, 60 * 1000);
+      //}, 60 * 1000);
     }, 18000 * 1000);
     return () => clearInterval(interval);
   }, [urlStr]);
@@ -103,6 +103,7 @@ function App() {
         <NavbarComp />
         <Routes>
           <Route path="/" element={<SplashPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/home" element={<HomePage cryptos={cryptos} />} />
           <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
