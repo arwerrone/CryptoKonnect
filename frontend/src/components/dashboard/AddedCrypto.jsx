@@ -82,7 +82,7 @@ const PortfolioAddedCrypto = () => {
     <div>
       {amounts?.length === 0 ? (
         <p>
-          Your Portfolio List is empty. Please go to Homepage to add amounts to your Portfolio List. <Link to="/">Go to Crypto Search.</Link>
+          Your Portfolio List is empty. Please go to Homepage to add amounts to your Portfolio List. <Link to="/home">Go to Crypto Search.</Link>
         </p>
       ) : (
         <table className="w-full text-left">
