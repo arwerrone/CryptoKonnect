@@ -91,7 +91,7 @@ function App() {
     const interval = setInterval(() => {
       getAPIData();
       //}, 60 * 1000);
-    }, 18000 * 1000);
+    }, 60000 * 1000);
     return () => clearInterval(interval);
   }, [urlStr]);
 

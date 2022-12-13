@@ -30,7 +30,7 @@ const SplashFeatured = () => {
       <div className="container">
         {/* Left */}
         <div className="left">
-          <h2>Explore top Crypto's Like Bitcoin, Ethereum, and Dogecoin</h2>
+          <h2>Explore top Cryptos Like Bitcoin, Ethereum, and Dogecoin</h2>
           <p>See all available assets: Your Customized Portfolio</p>
           <Link className="btn-danger rounded-lg py-2 w-[30%] bg-green-500 text-center no-underline" to="/home">
             See More Coins

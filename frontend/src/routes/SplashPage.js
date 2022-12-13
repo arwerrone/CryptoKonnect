@@ -6,8 +6,8 @@ import SplashSignup from '../components/splash/SplashSignup'
 function SplashPage() {
   return (
     <>
-    <div><SplashSignup /></div>
     <div><SplashFeatured /></div>
+    <div><SplashSignup /></div>
     <div><SplashHero /></div>
     </>
   )
